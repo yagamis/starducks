@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  starducks
+
+  Created by MAC on 2020/7/22.
+ // The left side hand "key" in any language is OK, mustn't be English word
+*/
+"饮品" = "마실 것";
+"现在下单" = "지금 주문하세요";
+"星冰乐" = "프라푸치노";
+"热咖啡" = "뜨거운 커피";
+"冰咖啡" = "아이스 커피";
+"热茶" = "뜨거운 차";
+"中杯" = "긴";
+"大杯" = "큰";
+"特大杯" = "이십";
+"杯型" = "크기";
+"配奶" = "우유";
+"加到购物袋" = "바구니에 담기";

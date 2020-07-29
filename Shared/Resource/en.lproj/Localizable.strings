@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  starducks
+
+  Created by MAC on 2020/7/22.
+ // The left side hand "key" in any language is OK, mustn't be English word
+*/
+"饮品" = "Beverage";
+"现在下单" = "Order Now";
+"星冰乐" = "Frappuccino";
+"热咖啡" = "Hot Coffee";
+"冰咖啡" = "Iced Coffee";
+"热茶" = "Hot tea";
+"中杯" = "Tall";
+"大杯" = "Grande";
+"特大杯" = "Venti";
+"杯型" = "Size";
+"配奶" = "Milk";
+"加到购物袋" = "Add to Bag";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+

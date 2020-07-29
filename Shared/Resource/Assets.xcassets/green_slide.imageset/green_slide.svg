@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="514px" viewBox="0 0 52 514" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>green_slide</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(0.000000, -344.000000)" fill="#009E69">
+            <g id="green_slider" transform="translate(-17.000000, 0.000000)">
+                <path d="M13.578125,-5.68434189e-14 C15.3258984,370 20.6592318,577.333333 29.578125,622 C42.9564648,689 75.3226758,698.238281 67.5703125,738 C59.8179492,777.761719 13.578125,809.820313 13.578125,896 C13.578125,953.453125 9.05208333,953.453125 0,896 L0,-5.68434189e-14 L13.578125,-5.68434189e-14 Z" id="green_slide"></path>
+            </g>
+        </g>
+    </g>
+</svg>
