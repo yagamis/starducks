@@ -68,6 +68,7 @@ struct HomeView: View {
         .onAppear {
             getDataFromNetwork()
 //            getDataFromLocal()
+            print("Home appear")
         }
     }
     
@@ -75,7 +76,7 @@ struct HomeView: View {
     func getDataFromLocal()  {
         loading = true
         
-        let drinks:[Drink] = load("drinks2.json")
+        let drinks:[Drink] = load("drinks.json")
         
         withAnimation {
             //保存每个类别下，菜单的序号

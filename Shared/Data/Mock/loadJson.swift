@@ -1,8 +1,8 @@
 
 import Foundation
 
-let drinksData : [Drink] = load("drinks.json")
-let ordersData : [Order] = load("orders2.json") //download from swagger api test by create_at DESC
+let drinksData : [Drink] = load("drinks.json") //Download from swagger api test
+let ordersData : [Order] = load("orders.json") //Download from swagger api test , params:  create_at DESC
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

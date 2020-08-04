@@ -39,7 +39,8 @@ struct SideBar: View {
                         .foregroundColor(Color("gradientEnd"))
                         .onTapGesture(perform: {
                             collapsed.toggle()
-                            if collapsed {getOrders()}
+                            if !collapsed {return}
+                            getOrders()
                         })
                     Image(systemName: "chevron.right").font(.title).foregroundColor(.white)
                         .rotationEffect(collapsed ? .degrees(180) : .zero)
@@ -57,6 +58,8 @@ struct SideBar: View {
                         if (abs(value.translation.width) > 10) {
                             withAnimation() {
                                 collapsed.toggle()
+                                if !collapsed {return}
+                                getOrders()
                             }
                         }
                     })
@@ -70,7 +73,11 @@ struct SideBar: View {
     func getOrders() {
         Request {
             Url(Network.findOrders)
-            Query(["_sort": "created_at:DESC"])
+            Query([
+                "_sort"  : "created_at:DESC",
+                "_limit" : "6",
+                "status" : "0",
+            ])
         }
         .onJson({ (json) in
             let orders = try! JSONDecoder().decode([Order].self, from: json.data!)

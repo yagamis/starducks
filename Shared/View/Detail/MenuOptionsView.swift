@@ -20,7 +20,7 @@ struct MenuOptionsView: View {
                         .opacity(0.15)
                         .padding(.top, 16)
                     
-                    // tile and price
+                    // title and price
                     VStack(alignment: .center) {
                         Text(menu.name)
                             .font(.system(size: 36))
