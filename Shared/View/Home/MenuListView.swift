@@ -17,7 +17,7 @@ struct MenuListView: View {
                         LazyHStack(spacing: spacing) {
                             if !menus.isEmpty {
                                 ForEach(menus.indices) { index in
-                                        MenuCoverView(coverImage: menus[index].image[0])
+                                    MenuCoverView(imgUrl: menus[index].image[0].url)
                                             .frame(width: swipeWidth, height: swipeHeight)
                                             .scaleEffect(selection == index ? 1 : 0.8)
                                             .animation(.easeOut)

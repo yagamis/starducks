@@ -98,7 +98,7 @@ struct MenuOptionsView: View {
         newOrder.size = sizeSelection.description
         newOrder.price = menu.price
         newOrder.quantity = 1
-        newOrder.imgUrl = menu.image[0].url
+        newOrder.imgUrl = menu.image[0].formats["thumbnail"]!.url
         newOrder.status = 0
         if !menu.milk.isEmpty {
             newOrder.milk_option = menu.milk[milkSelection].name

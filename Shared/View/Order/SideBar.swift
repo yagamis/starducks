@@ -1,15 +1,12 @@
-//
-//  SliderView.swift
-//  starducks
-//
-//  Created by MAC on 2020/7/20.
-//
-
 import SwiftUI
+import Request
 
 struct SideBar: View {
     @State var collapsed = false
     @Environment(\.layoutDirection) var layout
+    @State var orders : [Order] = []
+
+    @State private var selection = 0
     
     var body: some View {
 
@@ -24,10 +21,16 @@ struct SideBar: View {
                 })
             
             HStack(alignment: .bottom, spacing:-3) {
-                LinearGradient(gradient: Gradient(colors: [Color("gradientStart"), Color("gradientEnd")]), startPoint: .leading, endPoint: .trailing)
-                    .frame(width: 200, height: screen.height)
-                
-                
+                ZStack(alignment: .top) { //对齐，防止顶端缝隙
+                    LinearGradient(gradient: Gradient(colors: [Color("gradientStart"), Color("gradientEnd")]), startPoint: .leading, endPoint: .trailing)
+                        .frame(width: 200, height: screen.height )
+                    
+                    if !orders.isEmpty && collapsed {
+                        OrderListView(orders: orders, selection: $selection)
+                    }
+    
+                }
+
                 ZStack {
                     Image("green_slide")
                         .renderingMode(.template)
@@ -36,6 +39,7 @@ struct SideBar: View {
                         .foregroundColor(Color("gradientEnd"))
                         .onTapGesture(perform: {
                             collapsed.toggle()
+                            if collapsed {getOrders()}
                         })
                     Image(systemName: "chevron.right").font(.title).foregroundColor(.white)
                         .rotationEffect(collapsed ? .degrees(180) : .zero)
@@ -59,14 +63,32 @@ struct SideBar: View {
             )
 
         }
+        .ignoresSafeArea()
 
+    }
+    
+    func getOrders() {
+        Request {
+            Url(Network.findOrders)
+            Query(["_sort": "created_at:DESC"])
+        }
+        .onJson({ (json) in
+            let orders = try! JSONDecoder().decode([Order].self, from: json.data!)
+            
+            withAnimation {
+                self.orders = orders
+            }
+        })
+        .call()
     }
 }
 
 struct SliderView_Previews: PreviewProvider {
     static var previews: some View {
-        SideBar()
-            .environment(\.locale, .init(identifier:"ar-sa"))
-            .environment(\.layoutDirection, .rightToLeft)
+        Group {
+            SideBar()
+            SideBar()
+                .environment(\.layoutDirection, .rightToLeft)
+        }
     }
 }

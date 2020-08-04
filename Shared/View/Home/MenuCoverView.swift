@@ -2,7 +2,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct MenuCoverView: View {
-    let coverImage : CoverImage
+    let imgUrl : String
  
     var body: some View {
         ZStack {
@@ -16,7 +16,7 @@ struct MenuCoverView: View {
                     .foregroundColor(Color("coverMask"))
             }
                 
-            WebImage(url: URL(string: baseUrl + coverImage.url))
+            WebImage(url: URL(string: baseUrl + imgUrl))
                 .resizable()
                 .scaledToFit()
                 .frame(width: 230)
@@ -27,13 +27,13 @@ struct MenuCoverView: View {
 struct MenuCoverView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MenuCoverView(coverImage: drinksData[0].menus[0].image[0])
+            MenuCoverView(imgUrl: drinksData[0].menus[0].image[0].url)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-            MenuCoverView(coverImage: drinksData[0].menus[2].image[0])
+            MenuCoverView(imgUrl: drinksData[0].menus[2].image[0].url)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-            MenuCoverView(coverImage: drinksData[0].menus[1].image[0])
+            MenuCoverView(imgUrl: drinksData[0].menus[1].image[0].url)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }

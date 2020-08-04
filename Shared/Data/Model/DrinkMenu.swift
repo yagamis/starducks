@@ -1,10 +1,3 @@
-//
-//  Menu.swift
-//  starducks
-//
-//  Created by MAC on 2020/7/18.
-//
-
 import Foundation
 
 
@@ -28,17 +21,9 @@ struct MilkOption: Codable,Identifiable {
 struct CoverImage: Codable,Identifiable {
     var id = 0
     var url = ""
+    var formats : [String : imgDetail]
 }
 
-
-struct Order: Codable, Identifiable {
-    var id = 0
-    var menu_id = 0
-    var menu_name = ""
-    var milk_option  = ""
-    var size = ""
-    var price = 0.0
-    var quantity = 0
-    var imgUrl = ""
-    var status = 0
+struct imgDetail: Codable {
+    var url = ""
 }

@@ -10,6 +10,7 @@ struct Network {
     static let findDrinks = baseUrl + "/drinks"
     static let createOrder = baseUrl + "/orders"
     static let findOrders = createOrder
+}
     
 //    static func createAnOrder(str: String,
 //                   onError: @escaping (RequestError) -> Void ,
@@ -29,7 +30,7 @@ struct Network {
 //        }
 //        .call()
 //    }
-}
+
 
 //        Network.createAnOrder(str: jsonStr) { (error) in
 //            print("Error, 添加订单错误：",error)
