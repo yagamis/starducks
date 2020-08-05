@@ -1,51 +1,89 @@
 import SwiftUI
+import Request
 
 struct OrderListView: View {
-    var orders : [Order]
+    @Binding var orders : [Order]
     @Binding var selection : Int
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
 
             VStack(spacing: 40,  content: {
-                Text("最近订单")
-                    .font(.system(size: 32))
+               
+                Image("bag")
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40)
+                    
+                
                 if !orders.isEmpty {
                     ForEach(orders.indices, id: \.hashValue) { (index) in
-                        LazyVStack {
+                        LazyVStack() {
+                            HStack { //删除
+                                Button(action: {
+                                    deleteOrder(id: orders[index].id)
+                                    orders.remove(at: index)
+                                    
+                                }, label: {
+                                    Image(systemName: "minus.circle")
+                                        .font(.system(size: 25))
+                                        
+                                })
+                                Spacer()
+                            }.offset(x: 10, y: 50)
+                            
                             OrderCoverView(imgUrl: orders[index].imgUrl)
+                            
+                            HStack {
+                                Spacer()
+                                Button(action: {}, label: {
+                                    Image(systemName: "creditcard.fill")
+                                        .font(.system(size: 30))
+                                        
+                                })
+                            }.offset(x: -15, y: -30)
+                            
                             Text(orders[index].menu_name)
                                 .font(.system(size: 24))
-                                .frame(maxWidth: 150,maxHeight: .infinity)
+                                .frame(maxWidth: 170,maxHeight: .infinity)
+
                         }
-    //                        .onTapGesture {
-    //                            withAnimation(Animation.interactiveSpring()) {
-    //                                selection = index
-    //                            }
-    //                        }
                     }
                 }
                
             })
             .padding(.top, 40)
             .foregroundColor(.white)
-            .frame(width: 160)
+            .frame(width: 190)
         })
     }
-}
-
-struct OrderListView_Previews: PreviewProvider {
-
-    struct testView1: View {
-        @State private var selection = 0
-        
-        var body: some View {
-            OrderListView(orders: ordersData, selection: $selection)
-        }
-    }
     
-    static var previews: some View {
-        testView1()
-            .preferredColorScheme(.dark)
+    
+    func deleteOrder(id: Int) {
+        AnyRequest<Order> {
+            Url(Network.deleteOrder + id.description)
+            Method(.delete)
+        }
+        .onObject({ _ in
+           debugPrint("删除成功！")
+        })
+        .call()
     }
 }
+
+//struct OrderListView_Previews: PreviewProvider {
+//
+//    struct testView1: View {
+//        @State private var selection = 0
+//
+//        var body: some View {
+//            OrderListView(orders: ordersData, selection: $selection)
+//        }
+//    }
+//
+//    static var previews: some View {
+//        testView1()
+//            .preferredColorScheme(.dark)
+//    }
+//}

@@ -26,7 +26,7 @@ struct SideBar: View {
                         .frame(width: 200, height: screen.height )
                     
                     if !orders.isEmpty && collapsed {
-                        OrderListView(orders: orders, selection: $selection)
+                        OrderListView(orders: $orders, selection: $selection)
                     }
     
                 }
@@ -71,17 +71,14 @@ struct SideBar: View {
     }
     
     func getOrders() {
-        Request {
+        AnyRequest<[Order]> {
             Url(Network.findOrders)
             Query([
                 "_sort"  : "created_at:DESC",
-                "_limit" : "6",
-                "status" : "0",
+                "_limit" : "10",
             ])
         }
-        .onJson({ (json) in
-            let orders = try! JSONDecoder().decode([Order].self, from: json.data!)
-            
+        .onObject({ (orders) in
             withAnimation {
                 self.orders = orders
             }

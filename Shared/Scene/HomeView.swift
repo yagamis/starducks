@@ -68,7 +68,6 @@ struct HomeView: View {
         .onAppear {
             getDataFromNetwork()
 //            getDataFromLocal()
-            print("Home appear")
         }
     }
     
@@ -88,12 +87,10 @@ struct HomeView: View {
     
     func getDataFromNetwork()  {
         loading = true
-        Request {
+        AnyRequest<[Drink]> {
             Url(Network.findDrinks)
         }
-        .onJson({ (json) in
-            let drinks = try! JSONDecoder().decode([Drink].self, from: json.data!)
-            
+        .onObject({ (drinks) in
             withAnimation {
                 //保存每个类别下，菜单的序号
                 self.menuSelections = Array(repeating: 0, count: drinks.count)

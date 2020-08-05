@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct BagButton: View {
-    @State var unpay = 3
-    @State var paidSum = 1
+    @State var unpay = 0
+    @State var paidSum = 0
     
     var body: some View {
         

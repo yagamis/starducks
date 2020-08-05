@@ -110,7 +110,7 @@ struct MenuOptionsView: View {
             Header.ContentType(.json)
             RequestBody(newOrder)
         }
-        .onJson { (json) in
+        .onJson { _ in
             withAnimation {
                 loading = false
                 complete = true
@@ -118,7 +118,7 @@ struct MenuOptionsView: View {
             }
         }
         .onError { (error) in
-            print("Error, 添加订单错误：",error)
+            print("Error create：",error)
             withAnimation {
                 loading = false
             }

@@ -220,7 +220,6 @@
 		042A494024D907EA00E7BB44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				04502AEB24C5B3F200C26CB5 /* BagButton.swift */,
 				04570EA124C395E30010A83D /* MenuListView.swift */,
 				04135F5924C1CECE00B3580C /* DrinkListView.swift */,
 				04135F5624C1C0C900B3580C /* DrinkView.swift */,
@@ -233,6 +232,7 @@
 		042A494124D9088E00E7BB44 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				04502AEB24C5B3F200C26CB5 /* BagButton.swift */,
 				0421B1CE24CA2CD90057B8DA /* PriceLabel.swift */,
 			);
 			path = Shared;
