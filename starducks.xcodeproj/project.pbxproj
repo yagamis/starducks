@@ -62,6 +62,8 @@
 		045DB77824C818C700D5295B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 045DB77A24C818C700D5295B /* Localizable.strings */; };
 		047235BD24D965CE0023417E /* orders.json in Resources */ = {isa = PBXBuildFile; fileRef = 047235BC24D965CE0023417E /* orders.json */; };
 		047235BE24D965CE0023417E /* orders.json in Resources */ = {isa = PBXBuildFile; fileRef = 047235BC24D965CE0023417E /* orders.json */; };
+		0484E6F524DE676600CAAE03 /* OrderHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E6F424DE676600CAAE03 /* OrderHUD.swift */; };
+		0484E6F624DE676600CAAE03 /* OrderHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E6F424DE676600CAAE03 /* OrderHUD.swift */; };
 		04A448AB24CBFBD80090B987 /* test234.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A448AA24CBFBD80090B987 /* test234.swift */; };
 		04A448B224CC97A30090B987 /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A448B124CC97A30090B987 /* ScreenView.swift */; };
 		04A80FE824CAEBFA000A93AB /* MaskTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A80FE724CAEBFA000A93AB /* MaskTest.swift */; };
@@ -116,6 +118,7 @@
 		045DB78024C82CB900D5295B /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		045DB78224C8363E00D5295B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		047235BC24D965CE0023417E /* orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders.json; sourceTree = "<group>"; };
+		0484E6F424DE676600CAAE03 /* OrderHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHUD.swift; sourceTree = "<group>"; };
 		04A448AA24CBFBD80090B987 /* test234.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test234.swift; sourceTree = "<group>"; };
 		04A448B124CC97A30090B987 /* ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenView.swift; sourceTree = "<group>"; };
 		04A80FE724CAEBFA000A93AB /* MaskTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskTest.swift; sourceTree = "<group>"; };
@@ -233,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				04502AEB24C5B3F200C26CB5 /* BagButton.swift */,
+				0484E6F424DE676600CAAE03 /* OrderHUD.swift */,
 				0421B1CE24CA2CD90057B8DA /* PriceLabel.swift */,
 			);
 			path = Shared;
@@ -467,6 +471,7 @@
 				04A448B224CC97A30090B987 /* ScreenView.swift in Sources */,
 				0421B1D224CA3A2E0057B8DA /* SizeOptionsView.swift in Sources */,
 				04135F5724C1C0C900B3580C /* DrinkView.swift in Sources */,
+				0484E6F524DE676600CAAE03 /* OrderHUD.swift in Sources */,
 				04135F5D24C1D34F00B3580C /* loadJson.swift in Sources */,
 				04349C2124CA6579009A8BD7 /* AddToBagButton.swift in Sources */,
 				0421B1CF24CA2CD90057B8DA /* PriceLabel.swift in Sources */,
@@ -505,6 +510,7 @@
 				04135F5824C1C0C900B3580C /* DrinkView.swift in Sources */,
 				04135F5E24C1D34F00B3580C /* loadJson.swift in Sources */,
 				04349C2224CA6579009A8BD7 /* AddToBagButton.swift in Sources */,
+				0484E6F624DE676600CAAE03 /* OrderHUD.swift in Sources */,
 				0421B1D024CA2CD90057B8DA /* PriceLabel.swift in Sources */,
 				04A9FE4824D9CFCF00AA576C /* OrderThumbView.swift in Sources */,
 				044D986824C2D26D0007F9DA /* DrinkMenu.swift in Sources */,

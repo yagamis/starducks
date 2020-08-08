@@ -9,71 +9,73 @@ struct MenuOptionsView: View {
     @Environment(\.presentationMode) var presentMode
     
     @State var loading = false
-    @State var complete = false
+    
+    @EnvironmentObject var status : OrderStatus
     
     var body: some View {
-
+        
         ZStack {
-                VStack {
-                    RoundedRectangle(cornerRadius: 3)
-                        .frame(width: 42, height: 6)
-                        .opacity(0.15)
-                        .padding(.top, 16)
-                    
-                    // title and price
-                    VStack(alignment: .center) {
-                        Text(menu.name)
-                            .font(.system(size: 36))
-                            .foregroundColor(.accentColor)
-                            .lineLimit(2) //文字两行显示
-                            .frame(maxWidth: .infinity,minHeight: 125)
-                        if !showMore {
-                            PriceLabel(menu: menu)
-                                .transition(.asymmetric(insertion: .slide, removal: .opacity))
-                        }
+            VStack {
+                RoundedRectangle(cornerRadius: 3)
+                    .frame(width: 42, height: 6)
+                    .opacity(0.15)
+                    .padding(.top, 16)
+                
+                // title and price
+                VStack(alignment: .center) {
+                    Text(menu.name)
+                        .font(.system(size: 36))
+                        .foregroundColor(.accentColor)
+                        .lineLimit(2) //文字两行显示
+                        .frame(maxWidth: .infinity,minHeight: 125)
+                    if !showMore {
+                        PriceLabel(menu: menu)
+                            .transition(.asymmetric(insertion: .slide, removal: .opacity))
                     }
-                    .padding()
+                }
+                .padding()
+                
+                //show options area
+                if showMore {
+                    VStack(alignment: .leading) {
+                        Text("杯型")
+                            .font(.system(size: 24))
+                            .foregroundColor(Color(.secondaryLabel))
+                        
+                        SizeOptionsView(selection: $sizeSelection)
+                        
+                    }.padding()
+                    .transition(.slide)
+                    .animation(.spring())
                     
-                    //show options area
-                    if showMore {
+                    if !menu.milk.isEmpty {
                         VStack(alignment: .leading) {
-                            Text("杯型")
+                            Text("配奶")
                                 .font(.system(size: 24))
                                 .foregroundColor(Color(.secondaryLabel))
-                            
-                            SizeOptionsView(selection: $sizeSelection)
+                            MilkOptionsView(selection: $milkSelection, options: menu.milk)
                             
                         }.padding()
                         .transition(.slide)
                         .animation(.spring())
-                        
-                        if !menu.milk.isEmpty {
-                            VStack(alignment: .leading) {
-                                Text("配奶")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(Color(.secondaryLabel))
-                                MilkOptionsView(selection: $milkSelection, options: menu.milk)
-                                
-                            }.padding()
-                            .transition(.slide)
-                            .animation(.spring())
-                        }
-                        
                     }
                     
-                    if loading {
-                        ProgressView("")
-                    } else {
-                        AddToBagButton().onTapGesture{
-                            createOrder()
-                        }
-                    }
                 }
-                .background(Blur(style: .systemChromeMaterial))
-                .cornerRadius(30)
-                .shadow(color: .clear, radius: 2, x: 0, y: 1)
-                .ignoresSafeArea()
-            }.ignoresSafeArea()
+                
+                if loading {
+                    ProgressView("")
+                }
+                
+                AddToBagButton().onTapGesture{
+                    createOrder()
+                }
+                
+            }
+            .background(Blur(style: .systemChromeMaterial))
+            .cornerRadius(30)
+            .shadow(color: .clear, radius: 2, x: 0, y: 1)
+            .ignoresSafeArea()
+        }.ignoresSafeArea()
         .offset(y: -10)
         .gesture(
             DragGesture()
@@ -111,11 +113,16 @@ struct MenuOptionsView: View {
             RequestBody(newOrder)
         }
         .onJson { _ in
-            withAnimation {
-                loading = false
-                complete = true
-                presentMode.wrappedValue.dismiss()
-            }
+                withAnimation {
+                    loading = false
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        status.action = .add //订单增加的全局通知
+                        status.currentOrder = newOrder
+                    }
+
+                    presentMode.wrappedValue.dismiss()
+                }
         }
         .onError { (error) in
             print("Error create：",error)
@@ -125,7 +132,7 @@ struct MenuOptionsView: View {
         }
         .call()
     }
-
+    
 }
 
 struct BagOptionView_Previews: PreviewProvider {

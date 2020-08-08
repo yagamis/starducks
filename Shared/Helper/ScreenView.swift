@@ -21,13 +21,6 @@ struct Blur: UIViewRepresentable {
     }
 }
 
-extension View {
-    func `if2`<Content: View>(_ conditional: Bool,  content: (Self) -> Content) -> TupleView<(Self?, Content?)> {
-        
-        if conditional { return TupleView((nil, content(self))) }
-        else { return TupleView((self, nil)) }
-    }
-}
 
 extension View {
     // 1 Create a ViewBuilder function that can be applied to any type of content conforming to view

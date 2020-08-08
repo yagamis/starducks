@@ -5,6 +5,7 @@ struct DetailView: View {
     let menu : DrinkMenu
     @State var showMore = false
     @Environment(\.presentationMode) var presentMode
+    
 
     var body: some View {
             ZStack(alignment:.bottom) {

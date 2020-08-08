@@ -10,6 +10,8 @@ struct HomeView: View {
     @State var drinkSelection = 0
     @State var menuSelections: [Int] = []
     @State var isShowDetail = false
+    @EnvironmentObject  var status : OrderStatus
+    
     
 
     var body: some View {
@@ -41,7 +43,8 @@ struct HomeView: View {
                                     isShowDetail.toggle()
                                 }
                                 .fullScreenCover(isPresented: $isShowDetail) {
-                                    DetailView(menu: drinks[index].menus[menuSelections[index]], showMore: false)
+                                    //弹出一个新view，环境变量需要传递
+                                    DetailView(menu: drinks[index].menus[menuSelections[index]], showMore: false).environmentObject(status)
                                 }
                            
                         }
@@ -56,19 +59,33 @@ struct HomeView: View {
             
             SideBar()
                     .offset(x: drinks.isEmpty ? -100 : 0)
-
-            BagButton()
-                .foregroundColor(.accentColor)
-                .padding(.bottom,50)
-                .padding(.trailing,30)
-                .offset(x: drinks.isEmpty ? 300 : 0)
             
-               
+            switch status.action {
+            case .add:
+                OrderHUD(text: "已下单，等待支付")
+                .padding(.bottom,30)
+                .padding(.trailing,30)
+            case .pay:
+                OrderHUD(text: "已支付,配送中！")
+                .padding(.bottom,30)
+                .padding(.trailing,30)
+                
+            case .start, .delete, .hudEnd:
+                BagButton()
+                    .foregroundColor(.accentColor)
+                    .padding(.bottom,50)
+                    .padding(.trailing,30)
+                    .offset(x: drinks.isEmpty ? 300 : 0)
+                
+            }
+            
+
         }
         .onAppear {
             getDataFromNetwork()
 //            getDataFromLocal()
         }
+        
     }
     
     
@@ -111,6 +128,7 @@ struct ContentView_Previews: PreviewProvider {
             HomeView()
                 .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"zh_cn"))
+                .environmentObject(OrderStatus())
 //            HomeView()
 //                .previewLayout(.sizeThatFits)
 //                .environment(\.locale, .init(identifier:"zh_tw"))
@@ -125,6 +143,7 @@ struct ContentView_Previews: PreviewProvider {
                 .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"ar-sa"))
                 .environment(\.layoutDirection, .rightToLeft)
+                .environmentObject(OrderStatus())
 //            HomeView()
 //                .previewLayout(.sizeThatFits)
 //                .environment(\.locale, .init(identifier:"ko_kr"))

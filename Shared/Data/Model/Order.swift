@@ -1,11 +1,5 @@
-//
-//  Order.swift
-//  starducks
-//
-//  Created by MAC on 2020/8/4.
-//
-
-import Foundation
+import SwiftUI
+import Request
 
 struct Order: Codable, Identifiable {
     var id = 0
@@ -17,4 +11,30 @@ struct Order: Codable, Identifiable {
     var quantity = 0
     var imgUrl = ""
     var status = 0
+}
+
+enum Action: String {
+    case start, add, delete, hudEnd, pay
+}
+
+class OrderStatus: ObservableObject {
+    @Published var action = Action.start
+    @Published var unpayOrders: [Order] = []
+    @Published var currentOrder: Order?
+    
+    func getUnpayOrders() {
+        AnyRequest<[Order]> {
+            Url(Network.findOrders)
+            Query([
+                "_sort"  : "created_at:DESC",
+                "status" : "0", //unpay filter
+            ])
+        }
+        .onObject({ (orders) in
+            withAnimation {
+                self.unpayOrders = orders
+            }
+        })
+        .call()
+    }
 }

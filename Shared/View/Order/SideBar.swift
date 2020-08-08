@@ -75,7 +75,7 @@ struct SideBar: View {
             Url(Network.findOrders)
             Query([
                 "_sort"  : "created_at:DESC",
-                "_limit" : "10",
+//                "status" : "0",
             ])
         }
         .onObject({ (orders) in

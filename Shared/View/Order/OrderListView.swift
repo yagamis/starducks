@@ -2,6 +2,7 @@ import SwiftUI
 import Request
 
 struct OrderListView: View {
+    @EnvironmentObject var status : OrderStatus
     @Binding var orders : [Order]
     @Binding var selection : Int
     
@@ -18,7 +19,7 @@ struct OrderListView: View {
                     
                 
                 if !orders.isEmpty {
-                    ForEach(orders.indices, id: \.hashValue) { (index) in
+                    ForEach(orders.indices, id: \.self) { (index) in
                         LazyVStack() {
                             HStack { //删除
                                 Button(action: {
@@ -31,7 +32,9 @@ struct OrderListView: View {
                                         
                                 })
                                 Spacer()
-                            }.offset(x: 10, y: 50)
+                            }
+                            .offset(x: 15, y: 50)
+                            .zIndex(1)
                             
                             OrderCoverView(imgUrl: orders[index].imgUrl)
                             
@@ -66,24 +69,26 @@ struct OrderListView: View {
             Method(.delete)
         }
         .onObject({ _ in
-           debugPrint("删除成功！")
+            debugPrint("删除成功！")
+            status.action = .delete
         })
         .call()
     }
 }
 
-//struct OrderListView_Previews: PreviewProvider {
-//
-//    struct testView1: View {
-//        @State private var selection = 0
-//
-//        var body: some View {
-//            OrderListView(orders: ordersData, selection: $selection)
-//        }
-//    }
-//
-//    static var previews: some View {
-//        testView1()
-//            .preferredColorScheme(.dark)
-//    }
-//}
+struct OrderListView_Previews: PreviewProvider {
+
+    struct testView1: View {
+        @State private var selection = 0
+        @State private var orders = ordersData
+
+        var body: some View {
+            OrderListView(orders: $orders, selection: $selection)
+        }
+    }
+
+    static var previews: some View {
+        testView1()
+            .preferredColorScheme(.dark)
+    }
+}

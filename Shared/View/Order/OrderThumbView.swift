@@ -17,9 +17,8 @@ struct HalfCapsule: Shape {
             $0.addLine(to: rightCorner)
             $0.addLine(to: rightMiddle)
             
-            
-            
             $0.addArc(center: center, radius: r, startAngle: .degrees(180), endAngle: .degrees(0), clockwise: true)
+            
         }
     }
 }
