@@ -23,13 +23,9 @@ struct MenuOptionsView: View {
                 
                 // title and price
                 VStack(alignment: .center) {
-                    Text(menu.name)
-                        .font(.system(size: 36))
-                        .foregroundColor(.accentColor)
-                        .lineLimit(2) //文字两行显示
-                        .frame(maxWidth: .infinity,minHeight: 125)
+                    MenuTitle(name: menu.name)
                     if !showMore {
-                        PriceLabel(menu: menu)
+                        PriceLabel(price: menu.price)
                             .transition(.asymmetric(insertion: .slide, removal: .opacity))
                     }
                 }
@@ -113,16 +109,15 @@ struct MenuOptionsView: View {
             RequestBody(newOrder)
         }
         .onJson { _ in
+
                 withAnimation {
                     loading = false
+                    status.action = .add //订单增加的全局通知
+                    status.currentOrder = newOrder
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        status.action = .add //订单增加的全局通知
-                        status.currentOrder = newOrder
-                    }
-
                     presentMode.wrappedValue.dismiss()
                 }
+
         }
         .onError { (error) in
             print("Error create：",error)
@@ -161,3 +156,5 @@ struct BagOptionView_Previews: PreviewProvider {
         }
     }
 }
+
+

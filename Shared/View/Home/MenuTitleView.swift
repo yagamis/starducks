@@ -23,7 +23,7 @@ struct MenuTitleView: View {
             
                 Spacer()
                 
-                PriceLabel(menu: menu)
+                PriceLabel(price: menu.price)
             
         }
         .frame(width: 280.0, height: 200.0)

@@ -4,9 +4,13 @@ import Request
 struct SideBar: View {
     @State var collapsed = false
     @Environment(\.layoutDirection) var layout
+    @EnvironmentObject var status : OrderStatus
+    
     @State var orders : [Order] = []
 
     @State private var selection = 0
+    
+    @State var showPay = false
     
     var body: some View {
 
@@ -26,7 +30,7 @@ struct SideBar: View {
                         .frame(width: 200, height: screen.height )
                     
                     if !orders.isEmpty && collapsed {
-                        OrderListView(orders: $orders, selection: $selection)
+                        OrderListView(orders: $orders, selection: $selection, showPay: $showPay)
                     }
     
                 }
@@ -67,15 +71,22 @@ struct SideBar: View {
 
         }
         .ignoresSafeArea()
+        .onReceive(status.$collapse, perform: { col in   //收到全局展开指令
+            if col { //展开，获取订单
+                collapsed = true
+                getOrders()
+            } else {//关闭
+                collapsed = false
+            }
+        })
 
     }
     
-    func getOrders() {
+    func getOrders() { //get all type of Orders
         AnyRequest<[Order]> {
             Url(Network.findOrders)
             Query([
                 "_sort"  : "created_at:DESC",
-//                "status" : "0",
             ])
         }
         .onObject({ (orders) in
@@ -88,9 +99,10 @@ struct SideBar: View {
 }
 
 struct SliderView_Previews: PreviewProvider {
+
     static var previews: some View {
         Group {
-            SideBar()
+           SideBar(collapsed: true)
             SideBar()
                 .environment(\.layoutDirection, .rightToLeft)
         }

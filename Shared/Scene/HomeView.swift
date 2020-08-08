@@ -11,8 +11,6 @@ struct HomeView: View {
     @State var menuSelections: [Int] = []
     @State var isShowDetail = false
     @EnvironmentObject  var status : OrderStatus
-    
-    
 
     var body: some View {
         //侧边栏和按钮，悬浮在首页垂直方向下方
@@ -76,6 +74,9 @@ struct HomeView: View {
                     .padding(.bottom,50)
                     .padding(.trailing,30)
                     .offset(x: drinks.isEmpty ? 300 : 0)
+                    .onTapGesture {
+                        status.collapse.toggle()
+                    }
                 
             }
             

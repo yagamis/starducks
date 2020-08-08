@@ -5,6 +5,7 @@ struct OrderListView: View {
     @EnvironmentObject var status : OrderStatus
     @Binding var orders : [Order]
     @Binding var selection : Int
+    @Binding var showPay : Bool
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
@@ -40,9 +41,16 @@ struct OrderListView: View {
                             
                             HStack {
                                 Spacer()
-                                Button(action: {}, label: {
+                                Button(action: {
+                                    showPay.toggle()
+                                    status.currentOrder = orders[index]
+                                }, label: {
                                     Image(systemName: "creditcard.fill")
                                         .font(.system(size: 30))
+                                        
+                                }).sheet(isPresented: $showPay, content: {
+                                    PayView(paySelection: 0, showPay: $showPay)
+                                        .environmentObject(status)
                                         
                                 })
                             }.offset(x: -15, y: -30)
@@ -81,9 +89,10 @@ struct OrderListView_Previews: PreviewProvider {
     struct testView1: View {
         @State private var selection = 0
         @State private var orders = ordersData
+        @State private var showPay = false
 
         var body: some View {
-            OrderListView(orders: $orders, selection: $selection)
+            OrderListView(orders: $orders, selection: $selection, showPay: $showPay)
         }
     }
 

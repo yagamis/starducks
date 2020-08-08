@@ -11,16 +11,23 @@ struct Order: Codable, Identifiable {
     var quantity = 0
     var imgUrl = ""
     var status = 0
+    var payvender = ""
 }
 
-enum Action: String {
-    case start, add, delete, hudEnd, pay
-}
+
 
 class OrderStatus: ObservableObject {
+    
+    enum Action: String {
+        case start, add, delete, hudEnd, pay
+    }
+    
+    
     @Published var action = Action.start
     @Published var unpayOrders: [Order] = []
     @Published var currentOrder: Order?
+    @Published var collapse = false
+    
     
     func getUnpayOrders() {
         AnyRequest<[Order]> {

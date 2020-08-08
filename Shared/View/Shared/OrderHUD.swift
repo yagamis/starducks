@@ -27,14 +27,6 @@ struct OrderHUD: View {
                     .renderingMode(.template)
                     .frame(width: 74,height: 74)
                 
-                if status.unpayOrders.count > 0 {
-                    ZStack {//数字角标，未支付数目
-                        Circle()
-                            .frame(width: 25, height: 25)
-                        Text(status.unpayOrders.count < 100 ? "\(status.unpayOrders.count)" : "99+")
-                            .foregroundColor(Color(.systemBackground))
-                    }.offset(x: -8, y: 8)
-                }
             }
         }
         .foregroundColor(Color("AccentColor"))
@@ -49,6 +41,7 @@ struct OrderHUD: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation {
                     status.action = .hudEnd
+                    
                 }
             }
             
