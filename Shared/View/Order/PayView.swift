@@ -3,56 +3,57 @@ import Request
 
 struct PayView: View {
     @State var paySelection : Int
-
+    
     @State private var loading = false
     @EnvironmentObject var status : OrderStatus
     @Binding var showPay : Bool
     
     var body: some View {
-
-        VStack() {
-            Spacer()
+        
+        ZStack(alignment: .bottom) {
+            Color(.clear)
             VStack {
-                    RoundedRectangle(cornerRadius: 3)
-                        .frame(width: 42, height: 6)
-                        .opacity(0.15)
-                        .padding(.top, 16)
-                    
-                    // title and price
-                    VStack(alignment: .center) {
-                        MenuTitle(name: status.currentOrder!.menu_name)
-                        PriceLabel(price: status.currentOrder!.price)
-                    }
-                    .padding()
-
-                        VStack(alignment: .leading) {
-                            Text("支付方式")
-                                .font(.system(size: 24))
-                                .foregroundColor(Color(.secondaryLabel))
-                            
-                            PayChoiceView(selection: $paySelection)
-                            
-                        }.padding()
-                        .transition(.slide)
-                        .animation(.spring())
-
-                    
-                    if loading {
-                        ProgressView("")
-                    }
-                    
-                    PayButton()
-                        .padding()
-                        .onTapGesture{
-                            updateOrder(id: status.currentOrder!.id)
-                        }
-                    
+                RoundedRectangle(cornerRadius: 3)
+                    .frame(width: 42, height: 6)
+                    .opacity(0.15)
+                    .padding(.top, 16)
+                
+                // title and price
+                VStack(alignment: .center) {
+                    MenuTitle(name: status.currentOrder!.menu_name)
+                    PriceLabel(price: status.currentOrder!.price)
                 }
-                .background(Blur(style: .systemChromeMaterial))
-                .cornerRadius(30)
-                .shadow(color: .clear, radius: 2, x: 0, y: 1)
-        }.frame(height: screen.height / 2 + 90)
-
+                .padding()
+                
+                VStack(alignment: .leading) {
+                    Text("支付方式")
+                        .font(.system(size: 24))
+                        .foregroundColor(Color(.secondaryLabel))
+                    
+                    PayChoiceView(selection: $paySelection)
+                    
+                }.padding()
+                .transition(.slide)
+                .animation(.spring())
+                
+                
+                if loading {
+                    ProgressView("")
+                }
+                
+                Button(action: {
+                    updateOrder(id: status.currentOrder!.id)
+                }, label: {
+                    PayButton()
+                }).padding()
+                
+            }
+            .background(Blur(style: .systemChromeMaterial))
+            .cornerRadius(30)
+            .shadow(color: .clear, radius: 2, x: 0, y: 1)
+        }.background(EmptyView())
+//        .foregroundColor(.clear)
+        
     }
     
     func updateOrder(id: Int)  {
@@ -94,10 +95,10 @@ struct PayView_Previews: PreviewProvider {
         @State var showPay = false
         @StateObject var status : OrderStatus = {
             let _status1 = OrderStatus()
-            _status1.currentOrder = ordersData[0]
+            _status1.currentOrder = ordersData[2]
             return _status1
         }()
-
+        
         var body: some View {
             PayView(paySelection: sel1, showPay: $showPay)
                 .environmentObject(status)

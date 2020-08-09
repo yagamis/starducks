@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PayButton: View {
     var body: some View {
- 
             HStack {
                 
                 Image(systemName: "creditcard.fill")
@@ -23,9 +22,6 @@ struct PayButton: View {
             )
             .foregroundColor(.accentColor)
             
-            
-
-        
     }
 }
 

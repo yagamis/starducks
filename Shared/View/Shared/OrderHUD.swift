@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct OrderHUD: View {
-    @EnvironmentObject var status : OrderStatus
+    
     @State var text = ""
+    @EnvironmentObject var status : OrderStatus
     
     
     var transition: AnyTransition {
@@ -53,16 +54,27 @@ struct OrderHUD: View {
 }
 
 struct OrderHUD_Previews: PreviewProvider {
-    
+    struct testView: View {
+        @State var text = ""
+        @StateObject var status : OrderStatus = {
+            let _status1 = OrderStatus()
+            _status1.currentOrder = ordersData[0]
+            return _status1
+        }()
+        
+        var body: some View {
+            OrderHUD(text: text)
+                .previewLayout(.sizeThatFits)
+                .environmentObject(status)
+        }
+    }
+
     static var previews: some View {
         Group {
-            OrderHUD(text: "已下单，等待支付")
+            testView(text: "已下单，等待支付")
                 .previewLayout(.sizeThatFits)
-                .environmentObject(OrderStatus())
-            OrderHUD(text: "已支付，等待配送")
+            testView(text: "已支付，等待配送")
                 .preferredColorScheme(.dark)
-                .previewLayout(.sizeThatFits)
-                .environmentObject(OrderStatus())
-        }
+        }.previewLayout(.sizeThatFits)
     }
 }

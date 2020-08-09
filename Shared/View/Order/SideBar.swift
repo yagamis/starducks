@@ -6,10 +6,8 @@ struct SideBar: View {
     @Environment(\.layoutDirection) var layout
     @EnvironmentObject var status : OrderStatus
     
-    @State var orders : [Order] = []
-
+//    @State var orders : [Order] = []
     @State private var selection = 0
-    
     @State var showPay = false
     
     var body: some View {
@@ -29,8 +27,9 @@ struct SideBar: View {
                     LinearGradient(gradient: Gradient(colors: [Color("gradientStart"), Color("gradientEnd")]), startPoint: .leading, endPoint: .trailing)
                         .frame(width: 200, height: screen.height )
                     
-                    if !orders.isEmpty && collapsed {
-                        OrderListView(orders: $orders, selection: $selection, showPay: $showPay)
+                    if !status.unpayOrders.isEmpty && collapsed {
+                       
+                        OrderListView(orders: $status.unpayOrders, selection: $selection, showPay: $showPay)
                     }
     
                 }
@@ -44,7 +43,8 @@ struct SideBar: View {
                         .onTapGesture(perform: {
                             collapsed.toggle()
                             if !collapsed {return}
-                            getOrders()
+//                            getOrders()
+                            status.getUnpayOrders()
                         })
                     Image(systemName: "chevron.right").font(.title).foregroundColor(.white)
                         .rotationEffect(collapsed ? .degrees(180) : .zero)
@@ -63,7 +63,8 @@ struct SideBar: View {
                             withAnimation() {
                                 collapsed.toggle()
                                 if !collapsed {return}
-                                getOrders()
+//                                getOrders()
+                                status.getUnpayOrders()
                             }
                         }
                     })
@@ -74,7 +75,8 @@ struct SideBar: View {
         .onReceive(status.$collapse, perform: { col in   //收到全局展开指令
             if col { //展开，获取订单
                 collapsed = true
-                getOrders()
+//                getOrders()
+                status.getUnpayOrders()
             } else {//关闭
                 collapsed = false
             }
@@ -82,20 +84,20 @@ struct SideBar: View {
 
     }
     
-    func getOrders() { //get all type of Orders
-        AnyRequest<[Order]> {
-            Url(Network.findOrders)
-            Query([
-                "_sort"  : "created_at:DESC",
-            ])
-        }
-        .onObject({ (orders) in
-            withAnimation {
-                self.orders = orders
-            }
-        })
-        .call()
-    }
+//    func getOrders() { //get all type of Orders
+//        AnyRequest<[Order]> {
+//            Url(Network.findOrders)
+//            Query([
+//                "_sort"  : "created_at:DESC",
+//            ])
+//        }
+//        .onObject({ (orders) in
+//            withAnimation {
+//                self.orders = orders
+//            }
+//        })
+//        .call()
+//    }
 }
 
 struct SliderView_Previews: PreviewProvider {
@@ -103,8 +105,10 @@ struct SliderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
            SideBar(collapsed: true)
-            SideBar()
+           SideBar()
                 .environment(\.layoutDirection, .rightToLeft)
+               
         }
+        .environmentObject(OrderStatus())
     }
 }

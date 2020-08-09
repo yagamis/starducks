@@ -112,8 +112,9 @@ struct MenuOptionsView: View {
 
                 withAnimation {
                     loading = false
-                    status.action = .add //订单增加的全局通知
                     status.currentOrder = newOrder
+                    status.action = .add //订单增加的全局通知
+                    
                     
                     presentMode.wrappedValue.dismiss()
                 }
