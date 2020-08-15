@@ -27,7 +27,7 @@ struct BagButton: View {
         .onReceive(status.$action, perform: { _ in
             print(status.action)
             if status.action != .hudEnd {
-                print("updating orders...")
+                print("hud end...")
                 status.getUnpayOrders()
             }
         })

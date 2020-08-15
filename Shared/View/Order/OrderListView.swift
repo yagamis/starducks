@@ -1,9 +1,10 @@
 import SwiftUI
 import Request
 
-
 struct OrderListView: View {
     @EnvironmentObject var status: OrderStatus
+ 
+    @Environment(\.layoutDirection) var layout
     
     @Binding var orders : [Order]
     @Binding var selection : Int
@@ -11,75 +12,66 @@ struct OrderListView: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
+                VStack(spacing: 40,  content: {
+                   
+                    Image("bag")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40)
 
-            VStack(spacing: 40,  content: {
-               
-                Image("bag")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40)
-
-                if !orders.isEmpty {
-                    ForEach(orders.indices, id: \.self) { (index) in
-                        LazyVStack() {
-                            
-                            if orders[index].status == 0 {
-                                HStack { //删除按钮
-                                    Button(action: {
-                                        deleteOrder(id: orders[index].id)
-                                        orders.remove(at: index)
-                                        
-                                    }, label: {
-                                        Image(systemName: "minus.circle")
-                                            .font(.system(size: 25))
+                    if !orders.isEmpty {
+                        ForEach(orders.indices, id: \.self) { (index) in
+                            LazyVStack() {
+                                //可以将未支付的订单删除
+                                if orders[index].status == 0 {
+                                    HStack {
+                                        Button(action: {
+                                            deleteOrder(id: orders[index].id)
+                                            orders.remove(at: index)
                                             
-                                    })
-                                    Spacer()
-                                }
-                                .offset(x: 15, y: 50)
-                                .zIndex(1)
-                            }
-                            
-                            OrderCoverView(imgUrl: orders[index].imgUrl)
-                            
-                            if orders[index].status == 0 {
-                                HStack {
-                                    Spacer()
-                                    Button(action: {
-                                        showPay.toggle()
-                                        status.currentOrder = orders[index]
-                                    }, label: {
-                                        Image(systemName: "creditcard.fill")
-                                            .font(.system(size: 30))
-                                            
-                                    })
-                                    .fullScreenCover(isPresented: $showPay) {
-                                        PayView(paySelection: 0, showPay: $showPay)
-                                            .environmentObject(status)
-
+                                        }, label: {
+                                            Image(systemName: "minus.circle")
+                                                .font(.system(size: 25))
+                                                
+                                        })
+                                        Spacer()
                                     }
-                                }.offset(x: -15, y: -30)
+                                    .offset(x: 15, y: 50)
+                                    .zIndex(1)
+                                }
+                                
+                                OrderCoverView(imgUrl: orders[index].imgUrl)
+                                
+                                //未支付状态，显示支付小图标
+                                if orders[index].status == 0 {
+                                    HStack {
+                                        Spacer()
+                                        Button(action: {
+                                            showPay.toggle()
+                                            status.currentOrder = orders[index]
+                                        }, label: {
+                                            Image(systemName: "creditcard.fill")
+                                                .font(.system(size: 30))
+                                                
+                                        })
+                                    }.offset(x: -15, y: -30)
+                                }
+                                
+                                
+                                Text(orders[index].menu_name)
+                                    .font(.system(size: 24))
+                                    .frame(maxWidth: 170,maxHeight: .infinity)
                             }
-                            
-                            
-                            Text(orders[index].menu_name)
-                                .font(.system(size: 24))
-                                .frame(maxWidth: 170,maxHeight: .infinity)
-
                         }
                     }
-                }
-               
-            })
-            .padding(.top, 40)
-            .foregroundColor(.white)
-            .frame(width: 190)
-        }).onAppear{
-            print("未支付数目",status.unpayOrders.count)
-        }
+                   
+                })
+                .padding(.top, 40)
+                .foregroundColor(.white)
+                .frame(width: 190)
+        })
     }
-    
     
     func deleteOrder(id: Int) {
         AnyRequest<Order> {
@@ -87,7 +79,7 @@ struct OrderListView: View {
             Method(.delete)
         }
         .onObject({ _ in
-            debugPrint("删除成功！")
+            debugPrint("服务器删除成功！")
             status.action = .delete
         })
         .call()

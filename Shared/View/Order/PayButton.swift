@@ -29,7 +29,7 @@ struct PayButton: View {
 struct PayButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PayButton().preferredColorScheme(.dark).previewLayout(.sizeThatFits).environment(\.locale, .init(identifier:"en"))
+            PayButton().preferredColorScheme(.dark).environment(\.locale, .init(identifier:"en"))
             PayButton().previewLayout(.sizeThatFits).environment(\.locale, .init(identifier:"zh"))
             PayButton().previewLayout(.sizeThatFits).environment(\.locale, .init(identifier:"ja"))
             

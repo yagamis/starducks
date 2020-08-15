@@ -4,6 +4,8 @@ struct MenuListView: View {
     //This view's data source
     var menus : [DrinkMenu]
     
+    
+    
     @Binding var selection    : Int          // Send to consumer
     @State private var offset : CGFloat = 0  // Offset of the entire swipeview
 
@@ -62,7 +64,7 @@ struct MenuListView: View {
 
 struct SwipeView_Previews: PreviewProvider {
     struct testSwipeView1 : View {
-        @State  private var selection = 2
+        @State  private var selection = 1
 
         var body: some View {
             VStack {

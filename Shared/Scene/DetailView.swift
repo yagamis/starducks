@@ -5,7 +5,7 @@ struct DetailView: View {
     let menu : DrinkMenu
     @State var showMore = false
     @Environment(\.presentationMode) var presentMode
-    
+    @EnvironmentObject var status: OrderStatus
 
     var body: some View {
             ZStack(alignment:.bottom) {
@@ -16,6 +16,7 @@ struct DetailView: View {
                         .scaledToFit()
                         .frame(width: 403, height: 516)
                         .padding(.top, 30.0)
+                        .matchedGeometryEffect(id: "ID1", in: status.namespace1)
                     Spacer()
                 }
                 

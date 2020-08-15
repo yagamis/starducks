@@ -1,9 +1,7 @@
-
 import SwiftUI
 import Request
 
 struct HomeView: View {
-    
     @State var drinks : [Drink] = []
 
     @State private var loading = false
@@ -11,7 +9,7 @@ struct HomeView: View {
     @State var menuSelections: [Int] = []
     @State var isShowDetail = false
     @EnvironmentObject  var status : OrderStatus
-
+ 
     var body: some View {
         //侧边栏和按钮，悬浮在首页垂直方向下方
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
@@ -25,11 +23,9 @@ struct HomeView: View {
                     }
                 }
                 
-                
                 if !drinks.isEmpty {
                     DrinkListView(drinks: drinks, selection: $drinkSelection)
-                    
-                    
+
                     ForEach(drinks.indices) { (index) in
                         
                         if drinkSelection == index {
@@ -44,19 +40,16 @@ struct HomeView: View {
                                     //弹出一个新view，环境变量需要传递
                                     DetailView(menu: drinks[index].menus[menuSelections[index]], showMore: false).environmentObject(status)
                                 }
-                           
                         }
                     }
-                    
                 }
-                  
-                
             }
             .padding(.vertical, 40.0)
             .padding(.leading, 10)
             
             SideBar()
                     .offset(x: drinks.isEmpty ? -100 : 0)
+                .zIndex(1)
             
             switch status.action {
             case .add:
@@ -64,7 +57,7 @@ struct HomeView: View {
                 .padding(.bottom,30)
                 .padding(.trailing,30)
             case .pay:
-                OrderHUD(text: "已支付,配送中！")
+                OrderHUD(text:"已支付,配送中！")
                 .padding(.bottom,30)
                 .padding(.trailing,30)
                 
@@ -77,10 +70,7 @@ struct HomeView: View {
                     .onTapGesture {
                         status.collapse.toggle()
                     }
-                
             }
-            
-
         }
         .onAppear {
             getDataFromNetwork()

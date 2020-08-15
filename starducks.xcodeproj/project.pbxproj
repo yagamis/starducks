@@ -60,6 +60,8 @@
 		04502AF324C5C78700C26CB5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04502AF124C5C78600C26CB5 /* Launch Screen.storyboard */; };
 		04570EA224C395E30010A83D /* MenuListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04570EA124C395E30010A83D /* MenuListView.swift */; };
 		04570EA324C395E30010A83D /* MenuListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04570EA124C395E30010A83D /* MenuListView.swift */; };
+		045924F624E7BDFE00D41077 /* orders5.json in Resources */ = {isa = PBXBuildFile; fileRef = 045924F524E7BDFE00D41077 /* orders5.json */; };
+		045924F724E7BDFE00D41077 /* orders5.json in Resources */ = {isa = PBXBuildFile; fileRef = 045924F524E7BDFE00D41077 /* orders5.json */; };
 		045DB77824C818C700D5295B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 045DB77A24C818C700D5295B /* Localizable.strings */; };
 		0484E6F524DE676600CAAE03 /* OrderHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E6F424DE676600CAAE03 /* OrderHUD.swift */; };
 		0484E6F624DE676600CAAE03 /* OrderHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E6F424DE676600CAAE03 /* OrderHUD.swift */; };
@@ -71,8 +73,6 @@
 		0484E6FF24DF0B1300CAAE03 /* PayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E6FD24DF0B1300CAAE03 /* PayButton.swift */; };
 		0484E70124DF10C700CAAE03 /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E70024DF10C700CAAE03 /* PayView.swift */; };
 		0484E70224DF10C700CAAE03 /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E70024DF10C700CAAE03 /* PayView.swift */; };
-		0484E70724DF2C7600CAAE03 /* orders4.json in Resources */ = {isa = PBXBuildFile; fileRef = 0484E70624DF2C7600CAAE03 /* orders4.json */; };
-		0484E70824DF2C7600CAAE03 /* orders4.json in Resources */ = {isa = PBXBuildFile; fileRef = 0484E70624DF2C7600CAAE03 /* orders4.json */; };
 		0484E70A24DF35B800CAAE03 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E70924DF35B800CAAE03 /* BottomSheetView.swift */; };
 		0484E70B24DF35B800CAAE03 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E70924DF35B800CAAE03 /* BottomSheetView.swift */; };
 		0484E70D24DF369C00CAAE03 /* test666.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484E70C24DF369C00CAAE03 /* test666.swift */; };
@@ -124,6 +124,7 @@
 		04502AEE24C5BD6400C26CB5 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		04502AF124C5C78600C26CB5 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		04570EA124C395E30010A83D /* MenuListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListView.swift; sourceTree = "<group>"; };
+		045924F524E7BDFE00D41077 /* orders5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders5.json; sourceTree = "<group>"; };
 		045DB77924C818C700D5295B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		045DB77C24C818FF00D5295B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		045DB77D24C820E000D5295B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -136,7 +137,6 @@
 		0484E6FA24DF09A100CAAE03 /* MenuTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitle.swift; sourceTree = "<group>"; };
 		0484E6FD24DF0B1300CAAE03 /* PayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayButton.swift; sourceTree = "<group>"; };
 		0484E70024DF10C700CAAE03 /* PayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayView.swift; sourceTree = "<group>"; };
-		0484E70624DF2C7600CAAE03 /* orders4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders4.json; sourceTree = "<group>"; };
 		0484E70924DF35B800CAAE03 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		0484E70C24DF369C00CAAE03 /* test666.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test666.swift; sourceTree = "<group>"; };
 		04A448AA24CBFBD80090B987 /* test234.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test234.swift; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				04135F5C24C1D34F00B3580C /* loadJson.swift */,
-				0484E70624DF2C7600CAAE03 /* orders4.json */,
+				045924F524E7BDFE00D41077 /* orders5.json */,
 				04C262F024D0A9CD00D1E322 /* drinks.json */,
 			);
 			path = Mock;
@@ -292,6 +292,7 @@
 		042A494624D90A9600E7BB44 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				044509AC24E062E700C9AE74 /* BottomSheetModal.swift */,
 				04CC987324CCC26F0099C3EC /* test654.swift */,
 				044D986F24C2E04C0007F9DA /* MenuTabPageView.swift */,
 				0484E70924DF35B800CAAE03 /* BottomSheetView.swift */,
@@ -356,7 +357,6 @@
 			isa = PBXGroup;
 			children = (
 				04A448B124CC97A30090B987 /* ScreenView.swift */,
-				044509AC24E062E700C9AE74 /* BottomSheetModal.swift */,
 				042A494624D90A9600E7BB44 /* Misc */,
 			);
 			path = Helper;
@@ -458,11 +458,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0484E70724DF2C7600CAAE03 /* orders4.json in Resources */,
 				04502AF224C5C78700C26CB5 /* Launch Screen.storyboard in Resources */,
 				045DB77824C818C700D5295B /* Localizable.strings in Resources */,
 				04135F4124C1A60C00B3580C /* Assets.xcassets in Resources */,
 				04C262F124D0A9CD00D1E322 /* drinks.json in Resources */,
+				045924F624E7BDFE00D41077 /* orders5.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,7 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04502AF324C5C78700C26CB5 /* Launch Screen.storyboard in Resources */,
-				0484E70824DF2C7600CAAE03 /* orders4.json in Resources */,
+				045924F724E7BDFE00D41077 /* orders5.json in Resources */,
 				04135F4224C1A60C00B3580C /* Assets.xcassets in Resources */,
 				04C262F224D0A9CD00D1E322 /* drinks.json in Resources */,
 			);

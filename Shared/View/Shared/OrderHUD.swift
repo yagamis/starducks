@@ -18,7 +18,7 @@ struct OrderHUD: View {
         
         HStack {
             OrderThumbView(imgUrl: status.currentOrder?.imgUrl ?? "")
-            Text(text)
+            Text(LocalizedStringKey(text))
                 .font(.system(size: 22))
                 .fontWeight(.semibold)
             
@@ -39,12 +39,12 @@ struct OrderHUD: View {
                 .padding(.vertical, 15)
         )//圆角矩形边框、系统背景色，带阴影（辉光）的背景，垂直方向填充
         .onAppear {//指定时间内自动消失
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation {
                     status.action = .hudEnd
-                    
                 }
             }
+            
             
         }
         

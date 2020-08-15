@@ -8,52 +8,56 @@ struct PayView: View {
     @EnvironmentObject var status : OrderStatus
     @Binding var showPay : Bool
     
+    
     var body: some View {
-        
-        ZStack(alignment: .bottom) {
-            Color(.clear)
+
             VStack {
-                RoundedRectangle(cornerRadius: 3)
-                    .frame(width: 42, height: 6)
-                    .opacity(0.15)
-                    .padding(.top, 16)
-                
-                // title and price
-                VStack(alignment: .center) {
-                    MenuTitle(name: status.currentOrder!.menu_name)
-                    PriceLabel(price: status.currentOrder!.price)
+                HStack {
+                    Spacer()
+                    Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        .opacity(0.5)
+                        .onTapGesture(perform: {
+                            withAnimation {
+                                showPay.toggle()
+                            } 
+                        })
                 }
-                .padding()
+                .padding(.top)
+                .padding(.trailing)
                 
-                VStack(alignment: .leading) {
-                    Text("支付方式")
-                        .font(.system(size: 24))
-                        .foregroundColor(Color(.secondaryLabel))
-                    
-                    PayChoiceView(selection: $paySelection)
-                    
-                }.padding()
-                .transition(.slide)
-                .animation(.spring())
-                
-                
-                if loading {
-                    ProgressView("")
-                }
-                
-                Button(action: {
-                    updateOrder(id: status.currentOrder!.id)
-                }, label: {
-                    PayButton()
-                }).padding()
-                
-            }
-            .background(Blur(style: .systemChromeMaterial))
-            .cornerRadius(30)
-            .shadow(color: .clear, radius: 2, x: 0, y: 1)
-        }.background(EmptyView())
-//        .foregroundColor(.clear)
-        
+  
+                        // title and price
+                        VStack(alignment: .center) {
+                            MenuTitle(name: status.currentOrder!.menu_name)
+                            PriceLabel(price: status.currentOrder!.price)
+                        }
+                        .padding()
+                        
+                        VStack(alignment: .leading) {
+                            Text("支付方式")
+                                .font(.system(size: 24))
+                                .foregroundColor(Color(.secondaryLabel))
+                            
+                            PayChoiceView(selection: $paySelection)
+                        }.padding()
+                        
+                        
+                        if loading {
+                            ProgressView("")
+                        }
+                        
+                        Button(action: {
+                            updateOrder(id: status.currentOrder!.id)
+                        }, label: {
+                            PayButton()
+                        }).padding()
+                        
+                    }
+                    .background(Blur(style: .systemChromeMaterial))
+                    .cornerRadius(30)
+                    .shadow(color: .clear, radius: 2, x: 0, y: 1)
     }
     
     func updateOrder(id: Int)  {
@@ -70,12 +74,11 @@ struct PayView: View {
             RequestBody(newOrder)
         }
         .onObject { _ in
-            withAnimation {
                 loading = false
+                status.collapse = false //关闭侧边栏
                 status.action = .pay //订单支付的全局通知
                 
                 showPay.toggle()
-            }
         }
         .onError { (error) in
             print("Error update：",error)
@@ -109,12 +112,12 @@ struct PayView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             testView1(sel1: 1)
-                .previewLayout(.sizeThatFits)
+                
                 .preferredColorScheme(.dark)
                 .environment(\.locale, .init(identifier:"zh_cn"))
-            testView1(sel1: 2)
+            testView1(sel1: 0)
                 .environment(\.locale, .init(identifier:"ja_jp"))
-        }
+        }.previewLayout(.sizeThatFits)
     }
 }
 

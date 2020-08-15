@@ -1,10 +1,3 @@
-/* 
-  Localizable.strings
-  starducks
-
-  Created by MAC on 2020/7/22.
- // The left side hand "key" in any language is OK, mustn't be English word
-*/
 "饮品" = "마실 것";
 "现在下单" = "지금 주문하세요";
 "星冰乐" = "프라푸치노";
@@ -17,3 +10,8 @@
 "杯型" = "크기";
 "配奶" = "우유";
 "加到购物袋" = "바구니에 담기";
+"支付" = "지불";
+"支付方式" = "지불 금액";
+"已下单，等待支付" = "주문 추가";
+"已支付,配送中！" = "주문 배송";
+

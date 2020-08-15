@@ -1,14 +1,14 @@
 import SwiftUI
 
 enum Vendor: CaseIterable {
-    case wepay,alipay,applepay
+    case applepay,wepay,alipay
     
     var desc: [String] {
         switch self {
         case .wepay:
-            return ["wepay","微信"]
+            return ["wepay","Wechat"]
         case .alipay:
-            return ["alipay","支付宝"]
+            return ["alipay","Alipay"]
         case .applepay:
             return ["applepay","Apple Pay"]
         }

@@ -9,6 +9,7 @@ import SwiftUI
 
 let screen = UIScreen.main.bounds
 
+
 struct Blur: UIViewRepresentable {
     var style: UIBlurEffect.Style = .systemMaterial
 
@@ -19,6 +20,14 @@ struct Blur: UIViewRepresentable {
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
         uiView.effect = UIBlurEffect(style: style)
     }
+}
+
+var bottomUpTransition: AnyTransition {
+    let insertion = AnyTransition.move(edge: .bottom)
+        .combined(with: .opacity)
+    let removal = AnyTransition.move(edge: .bottom)
+        .combined(with: .opacity)
+    return .asymmetric(insertion: insertion, removal: removal)
 }
 
 
@@ -35,15 +44,3 @@ extension View {
   }
 }
 
-extension View {
-  func fillParent(alignment: Alignment = .center) -> some View {
-    self
-      .frame(
-        minWidth: 0,
-        maxWidth: .infinity,
-        minHeight: 0,
-        maxHeight: .infinity,
-        alignment: alignment
-    )
-  }
-}

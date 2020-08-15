@@ -15,7 +15,6 @@ struct Order: Codable, Identifiable {
 }
 
 class OrderStatus: ObservableObject {
-    
     enum Action: String {
         case start, add, delete, hudEnd, pay
     }
@@ -24,7 +23,9 @@ class OrderStatus: ObservableObject {
     @Published var unpayOrders: [Order] = []
     @Published var currentOrder: Order?
     @Published var collapse = false
-    
+    @Published var showPay = false
+
+    @Namespace var namespace1
 
     func getUnpayOrders() {
         AnyRequest<[Order]> {

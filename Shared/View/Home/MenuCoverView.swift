@@ -3,6 +3,7 @@ import SDWebImageSwiftUI
 
 struct MenuCoverView: View {
     let imgUrl : String
+    @EnvironmentObject var status: OrderStatus
  
     var body: some View {
         ZStack {
@@ -10,6 +11,7 @@ struct MenuCoverView: View {
                 Image("coffeeMask")
                     .renderingMode(.template)
                     .foregroundColor(Color("coverMask"))
+                    
             } else {
                 RoundedRectangle(cornerRadius: 16)
                     .frame(width: 270, height: 340)
@@ -20,6 +22,7 @@ struct MenuCoverView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 230)
+                .matchedGeometryEffect(id: "ID1", in: status.namespace1)
         }
     }
 }

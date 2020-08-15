@@ -17,9 +17,12 @@
 "杯型" = "Size";
 "配奶" = "Milk";
 "加到购物袋" = "Add to Bag";
-"" = "";
-"" = "";
-"" = "";
+"支付" = "Pay";
+"支付方式" = "Payment";
+"已下单，等待支付" = "Order Added";
+"已支付,配送中！" = "Order delivering";
+"Alipay" = "Alipay";
+"Wechat" = "Wechat";
 "" = "";
 "" = "";
 
