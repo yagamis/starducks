@@ -109,11 +109,15 @@ struct MenuOptionsView: View {
             RequestBody(newOrder)
         }
         .onJson { _ in
-            loading = false
-            status.currentOrder = newOrder
-            status.action = .add //订单增加的全局通知
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                loading = false
+                status.currentOrder = newOrder
+                status.action = .add //订单增加的全局通知
+                
+                presentMode.wrappedValue.dismiss()
+            }
             
-            presentMode.wrappedValue.dismiss()
+            
         }
         .onError { (error) in
             print("Error create：",error)

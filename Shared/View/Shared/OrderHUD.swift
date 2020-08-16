@@ -39,18 +39,26 @@ struct OrderHUD: View {
                 .padding(.vertical, 15)
         )//圆角矩形边框、系统背景色，带阴影（辉光）的背景，垂直方向填充
         .onAppear {//指定时间内自动消失
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let dispatchWorkHolder = DispatchWorkHolder()
+            dispatchWorkHolder.work?.cancel()
+            dispatchWorkHolder.work = DispatchWorkItem(block: {
                 withAnimation {
                     status.action = .hudEnd
                 }
-            }
-            
-            
+            })
+            //status.action != .hudEnd, 
+            if let work = dispatchWorkHolder.work {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: work)
+            }    
         }
         
         .transition(transition)
         
     }
+}
+
+class DispatchWorkHolder {
+    var work: DispatchWorkItem?
 }
 
 struct OrderHUD_Previews: PreviewProvider {

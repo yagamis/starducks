@@ -79,8 +79,10 @@ struct OrderListView: View {
             Method(.delete)
         }
         .onObject({ _ in
-            debugPrint("服务器删除成功！")
-            status.action = .delete
+            DispatchQueue.main.async {
+                debugPrint("服务器删除成功！")
+                status.action = .delete
+            }
         })
         .call()
     }

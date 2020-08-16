@@ -1,10 +1,3 @@
-/* 
-  Localizable.strings
-  starducks
-
-  Created by MAC on 2020/7/22.
- // The left side hand "key" in any language is OK, mustn't be English word
-*/
 "饮品" = "飲品";
 "现在下单" = "即刻下單";
 "星冰乐" = "星冰樂";
