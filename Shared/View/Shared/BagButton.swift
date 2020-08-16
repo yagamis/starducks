@@ -24,10 +24,9 @@ struct BagButton: View {
             }
         }
         //hub结束并不获取新订单
-        .onReceive(status.$action, perform: { _ in
-            print(status.action)
-            if status.action != .hudEnd {
-                print("hud end...")
+        .onReceive(status.$action, perform: { act in
+            print(act)
+            if act != .hudEnd {
                 status.getUnpayOrders()
             }
         })

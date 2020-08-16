@@ -36,7 +36,9 @@ class OrderStatus: ObservableObject {
             ])
         }
         .onObject({ (orders) in
-           self.unpayOrders = orders
+            DispatchQueue.main.async {
+                self.unpayOrders = orders
+            }
         })
         .call()
     }

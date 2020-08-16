@@ -61,7 +61,7 @@ struct HomeView: View {
                 .padding(.bottom,30)
                 .padding(.trailing,30)
                 
-            case .start, .delete, .hudEnd:
+            default:
                 BagButton()
                     .foregroundColor(.accentColor)
                     .padding(.bottom,50)
