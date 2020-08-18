@@ -15,7 +15,7 @@ struct starducksApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView().environmentObject(userStatus)
-            
+
         }
     }
 }

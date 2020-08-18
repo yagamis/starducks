@@ -6,7 +6,7 @@ struct MenuOptionsView: View {
     @State var sizeSelection : Int
     @State var milkSelection : Int
     @Binding var showMore : Bool
-    @Environment(\.presentationMode) var presentMode
+    @Binding var showDetail : Bool
     
     @State var loading = false
     
@@ -110,11 +110,14 @@ struct MenuOptionsView: View {
         }
         .onJson { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                loading = false
-                status.currentOrder = newOrder
-                status.action = .add //订单增加的全局通知
+
+                withAnimation {
+                    loading = false
+                    status.currentOrder = newOrder
+                    status.action = .add //订单增加的全局通知
+                    showDetail.toggle()
+                }
                 
-                presentMode.wrappedValue.dismiss()
             }
             
             
@@ -131,28 +134,14 @@ struct MenuOptionsView: View {
 }
 
 struct BagOptionView_Previews: PreviewProvider {
-    struct testView1: View {
-        let menu : DrinkMenu
-        
-        @State var sel1 : Int
-        @State var sel2 : Int
-        @State var more : Bool
-        
-        var body: some View {
-            MenuOptionsView(menu: menu, sizeSelection: sel1, milkSelection: sel2, showMore: $more)
-        }
-    }
-    
-    
     static var previews: some View {
         Group {
-            testView1(menu: drinksData[0].menus[1], sel1: 0, sel2: 0, more: false)
+            MenuOptionsView(menu: drinksData[0].menus[1], sizeSelection: 0, milkSelection: 0, showMore: .constant(false), showDetail: .constant(true))
                 .preferredColorScheme(.dark)
                 .environment(\.locale, .init(identifier:"zh_cn"))
-            testView1(menu: drinksData[0].menus[0], sel1: 0, sel2: 0, more: false)
-                
-                .environment(\.locale, .init(identifier:"ja_jp"))
             
+            MenuOptionsView(menu: drinksData[0].menus[0], sizeSelection: 0, milkSelection: 0, showMore: .constant(false), showDetail: .constant(false))
+                .environment(\.locale, .init(identifier:"ja_jp"))
         }
     }
 }

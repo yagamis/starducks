@@ -5,9 +5,9 @@ struct HomeView: View {
     @State var drinks : [Drink] = []
 
     @State private var loading = false
-    @State var drinkSelection = 0
-    @State var menuSelections: [Int] = []
-    @State var isShowDetail = false
+    @State var drinkSelect = 0
+    @State var menuSelects: [Int] = []
+    @State var showDetail = false
     @EnvironmentObject  var status : OrderStatus
  
     var body: some View {
@@ -24,21 +24,19 @@ struct HomeView: View {
                 }
                 
                 if !drinks.isEmpty {
-                    DrinkListView(drinks: drinks, selection: $drinkSelection)
+                    DrinkListView(drinks: drinks, selection: $drinkSelect)
 
                     ForEach(drinks.indices) { (index) in
                         
-                        if drinkSelection == index {
+                        if drinkSelect == index {
                                 Group {
-                                    MenuListView(menus: drinks[index].menus, selection: $menuSelections[index])
-                                    MenuTitleView(menu: drinks[index].menus[menuSelections[index]])
+                                    MenuListView(menus: drinks[index].menus, selection: $menuSelects[index])
+                                    MenuTitleView(menu: drinks[index].menus[menuSelects[index]])
                                 }
                                 .onTapGesture {
-                                    isShowDetail.toggle()
-                                }
-                                .fullScreenCover(isPresented: $isShowDetail) {
-                                    //弹出一个新view，环境变量需要传递
-                                    DetailView(menu: drinks[index].menus[menuSelections[index]], showMore: false).environmentObject(status)
+                                    withAnimation {
+                                        showDetail.toggle()
+                                    }
                                 }
                         }
                     }
@@ -47,9 +45,14 @@ struct HomeView: View {
             .padding(.vertical, 40.0)
             .padding(.leading, 10)
             
+            if showDetail {
+                DetailView(menu: drinks[drinkSelect].menus[menuSelects[drinkSelect]], showMore: false, showDetail: $showDetail).zIndex(3)
+                    
+            }
+            
             SideBar()
                     .offset(x: drinks.isEmpty ? -100 : 0)
-                .zIndex(1)
+                .zIndex(2)
             
             switch status.action {
             case .add:
@@ -87,7 +90,7 @@ struct HomeView: View {
         
         withAnimation {
             //保存每个类别下，菜单的序号
-            self.menuSelections = Array(repeating: 0, count: drinks.count)
+            self.menuSelects = Array(repeating: 0, count: drinks.count)
             self.drinks = drinks
             loading = false
         }
@@ -101,7 +104,7 @@ struct HomeView: View {
         .onObject({ (drinks) in
             withAnimation {
                 //保存每个类别下，菜单的序号
-                self.menuSelections = Array(repeating: 0, count: drinks.count)
+                self.menuSelects = Array(repeating: 0, count: drinks.count)
                 
                 self.drinks = drinks
                 

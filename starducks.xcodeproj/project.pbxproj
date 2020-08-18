@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040FDA1424EB19D0003055F3 /* testGeometryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FDA1324EB19D0003055F3 /* testGeometryView.swift */; };
+		040FDA1524EB19D0003055F3 /* testGeometryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FDA1324EB19D0003055F3 /* testGeometryView.swift */; };
 		04135F3D24C1A60C00B3580C /* starducksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04135F2A24C1A60B00B3580C /* starducksApp.swift */; };
 		04135F3E24C1A60C00B3580C /* starducksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04135F2A24C1A60B00B3580C /* starducksApp.swift */; };
 		04135F3F24C1A60C00B3580C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04135F2B24C1A60B00B3580C /* HomeView.swift */; };
@@ -92,6 +94,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040FDA1324EB19D0003055F3 /* testGeometryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testGeometryView.swift; sourceTree = "<group>"; };
 		04135F2A24C1A60B00B3580C /* starducksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = starducksApp.swift; sourceTree = "<group>"; };
 		04135F2B24C1A60B00B3580C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		04135F2C24C1A60C00B3580C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -340,6 +343,7 @@
 			children = (
 				04135F2B24C1A60B00B3580C /* HomeView.swift */,
 				0421655524C70DC1006BCBDF /* DetailView.swift */,
+				040FDA1324EB19D0003055F3 /* testGeometryView.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -508,6 +512,7 @@
 				042A494B24D918C400E7BB44 /* OrderCoverView.swift in Sources */,
 				04135F5124C1AAFE00B3580C /* Drink.swift in Sources */,
 				04502AEF24C5BD6400C26CB5 /* SideBar.swift in Sources */,
+				040FDA1424EB19D0003055F3 /* testGeometryView.swift in Sources */,
 				04FF687D24CDFA2900102470 /* OrderListView.swift in Sources */,
 				04570EA224C395E30010A83D /* MenuListView.swift in Sources */,
 				0421655924C75907006BCBDF /* DatePickerTest.swift in Sources */,
@@ -535,6 +540,7 @@
 				0421B1D324CA3A2E0057B8DA /* SizeOptionsView.swift in Sources */,
 				0484E6F924DF026F00CAAE03 /* PayChoiceView.swift in Sources */,
 				04135F5824C1C0C900B3580C /* DrinkView.swift in Sources */,
+				040FDA1524EB19D0003055F3 /* testGeometryView.swift in Sources */,
 				04135F5E24C1D34F00B3580C /* loadJson.swift in Sources */,
 				04349C2224CA6579009A8BD7 /* AddToBagButton.swift in Sources */,
 				0484E6F624DE676600CAAE03 /* OrderHUD.swift in Sources */,

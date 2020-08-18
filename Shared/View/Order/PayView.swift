@@ -21,7 +21,7 @@ struct PayView: View {
                 Image(systemName: "xmark.circle.fill")
                     .resizable()
                     .frame(width: 25, height: 25)
-                    .opacity(0.5)
+                    .foregroundColor(.secondary)
                     .onTapGesture(perform: {
                         withAnimation {
                             showPay.toggle()

@@ -30,6 +30,14 @@ var bottomUpTransition: AnyTransition {
     return .asymmetric(insertion: insertion, removal: removal)
 }
 
+var pushTransition: AnyTransition {
+    let insertion = AnyTransition.move(edge: .trailing)
+        .combined(with: .opacity)
+    let removal = AnyTransition.move(edge: .trailing)
+        .combined(with: .opacity)
+    return .asymmetric(insertion: insertion, removal: removal)
+}
+
 
 extension View {
     // 1 Create a ViewBuilder function that can be applied to any type of content conforming to view

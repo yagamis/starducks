@@ -1,11 +1,4 @@
-/* 
-  Localizable.strings
-  starducks
-
-  Created by MAC on 2020/7/22.
- // The left side hand "key" in any language is OK, mustn't be English word
-*/
-"饮品" = "Beverage";
+"饮品" = "Beverage";   // The left side hand "key" in any language is OK, mustn't be English word
 "现在下单" = "Order Now";
 "星冰乐" = "Frappuccino";
 "热咖啡" = "Hot Coffee";
@@ -18,7 +11,7 @@
 "配奶" = "Milk";
 "加到购物袋" = "Add to Bag";
 "支付" = "Pay";
-"支付方式" = "Payment";
+"支付方式" = "Pay by";
 "已下单，等待支付" = "Order Added";
 "已支付,配送中！" = "Order delivering";
 "Alipay" = "Alipay";
