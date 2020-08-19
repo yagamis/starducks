@@ -19,7 +19,7 @@ struct HomeView: View {
                         .font(.system(size: 32))
                         .foregroundColor(.accentColor)
                     if drinks.isEmpty && loading {
-                        ProgressView("")
+                        LoadingView()
                     }
                 }
                 

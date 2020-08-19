@@ -59,7 +59,7 @@ struct MenuOptionsView: View {
                 }
                 
                 if loading {
-                    ProgressView("")
+                    LoadingView()
                 }
                 
                 AddToBagButton().onTapGesture{
