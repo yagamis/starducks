@@ -4,7 +4,7 @@ import Request
 struct SideBar: View {
     @State var collapsed = false
     @Environment(\.layoutDirection) var layout
-    @EnvironmentObject var status : OrderStatus
+    @EnvironmentObject var store : Store
     @State private var selection = 0
 
     var body: some View {
@@ -28,8 +28,8 @@ struct SideBar: View {
                         .frame(width: 200, height: screen.height )
                         .flipsForRightToLeftLayoutDirection(layout == .rightToLeft) //flips the whole view when RTL detected
                     
-                    if !status.unpayOrders.isEmpty && collapsed {
-                        OrderListView(orders: $status.unpayOrders, selection: $selection, showPay: $status.showPay)
+                    if !store.unpaidOrders.isEmpty && collapsed {
+                        OrderListView(orders: $store.unpaidOrders, selection: $selection, showPay: $store.showPay)
                     }
                 }
 
@@ -42,7 +42,7 @@ struct SideBar: View {
                         .onTapGesture(perform: {
                             collapsed.toggle()
                             if !collapsed {return}
-                            status.getUnpayOrders()
+                            store.getUnpaidOrders()
                         })
                     Image(systemName: "chevron.right").font(.title).foregroundColor(.white)
                         .rotationEffect(collapsed ? .degrees(180) : .zero)
@@ -63,7 +63,7 @@ struct SideBar: View {
                             withAnimation() {
                                 collapsed.toggle()
                                 if !collapsed {return}
-                                status.getUnpayOrders()
+                                store.getUnpaidOrders()
                             }
                         }
                     })
@@ -71,17 +71,17 @@ struct SideBar: View {
 
             
             //支付view
-            if status.showPay {
+            if store.showPay {
                 Group {
                     Color("maskOverlay")
                         .onTapGesture {
                             withAnimation {
-                                status.showPay.toggle()
+                                store.showPay.toggle()
                             }
                     }
                     VStack {
                         Spacer()
-                        PayView(paySelection: 0, showPay: $status.showPay)
+                        PayView(paySelection: 0, showPay: $store.showPay)
                     }.padding(.bottom, 20)
                 }
                 .transition(bottomUpTransition)
@@ -90,15 +90,15 @@ struct SideBar: View {
 
         }
         .ignoresSafeArea()
-        .onReceive(status.$collapse, perform: { col in   //收到全局展开指令
-            if col { //展开，获取订单
+        .onReceive(store.$collapse) {    //收到全局展开指令
+            if $0 { //展开，获取订单
                 collapsed = true
 
-                status.getUnpayOrders()
+                store.getUnpaidOrders()
             } else {//关闭
                 collapsed = false
             }
-        })
+        }
 
     }
     
@@ -112,6 +112,6 @@ struct SliderView_Previews: PreviewProvider {
                 .environment(\.layoutDirection, .rightToLeft)
                
         }
-        .environmentObject(OrderStatus())
+        .environmentObject(Store())
     }
 }

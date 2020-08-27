@@ -2,13 +2,15 @@ import SwiftUI
 import Request
 
 struct HomeView: View {
-    @State var drinks : [Drink] = []
+    @State var loading = false
 
-    @State private var loading = false
+    @State var drinks : [Drink] = []
     @State var drinkSelect = 0
     @State var menuSelects: [Int] = []
+    
     @State var showDetail = false
-    @EnvironmentObject  var status : OrderStatus
+    
+    @EnvironmentObject  var store : Store
  
     var body: some View {
         //侧边栏和按钮，悬浮在首页垂直方向下方
@@ -54,7 +56,7 @@ struct HomeView: View {
                     .offset(x: drinks.isEmpty ? -100 : 0)
                 .zIndex(2)
             
-            switch status.action {
+            switch store.action {
             case .add:
                 OrderHUD(text: "已下单，等待支付")
                 .padding(.bottom,30)
@@ -71,13 +73,14 @@ struct HomeView: View {
                     .padding(.trailing,30)
                     .offset(x: drinks.isEmpty ? 300 : 0)
                     .onTapGesture {
-                        status.collapse.toggle()
+                        store.collapse.toggle()
                     }
             }
         }
         .onAppear {
             getDataFromNetwork()
 //            getDataFromLocal()
+            
         }
         
     }
@@ -122,7 +125,7 @@ struct ContentView_Previews: PreviewProvider {
             HomeView()
                 .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"zh_cn"))
-                .environmentObject(OrderStatus())
+                .environmentObject(Store())
 //            HomeView()
 //                .previewLayout(.sizeThatFits)
 //                .environment(\.locale, .init(identifier:"zh_tw"))
@@ -137,7 +140,7 @@ struct ContentView_Previews: PreviewProvider {
                 .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"ar-sa"))
                 .environment(\.layoutDirection, .rightToLeft)
-                .environmentObject(OrderStatus())
+                .environmentObject(Store())
 //            HomeView()
 //                .previewLayout(.sizeThatFits)
 //                .environment(\.locale, .init(identifier:"ko_kr"))

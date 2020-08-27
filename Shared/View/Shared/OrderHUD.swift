@@ -1,10 +1,8 @@
 import SwiftUI
 
 struct OrderHUD: View {
-    
     @State var text = ""
-    @EnvironmentObject var status : OrderStatus
-    
+    @EnvironmentObject var store : Store
     
     var transition: AnyTransition {
         let insertion = AnyTransition.move(edge: .trailing)
@@ -15,9 +13,8 @@ struct OrderHUD: View {
     }
     
     var body: some View {
-        
         HStack {
-            OrderThumbView(imgUrl: status.currentOrder?.imgUrl ?? "")
+            OrderThumbView(imgUrl: store.currentOrder?.imgUrl ?? "")
             Text(LocalizedStringKey(text))
                 .font(.system(size: 22))
                 .fontWeight(.semibold)
@@ -43,7 +40,7 @@ struct OrderHUD: View {
             dispatchWorkHolder.work?.cancel()
             dispatchWorkHolder.work = DispatchWorkItem(block: {
                 withAnimation {
-                    status.action = .hudEnd
+                    store.action = .hudEnd
                 }
             })
             //status.action != .hudEnd, 
@@ -64,8 +61,8 @@ class DispatchWorkHolder {
 struct OrderHUD_Previews: PreviewProvider {
     struct testView: View {
         @State var text = ""
-        @StateObject var status : OrderStatus = {
-            let _status1 = OrderStatus()
+        @StateObject var store : Store = {
+            let _status1 = Store()
             _status1.currentOrder = ordersData[0]
             return _status1
         }()
@@ -73,7 +70,7 @@ struct OrderHUD_Previews: PreviewProvider {
         var body: some View {
             OrderHUD(text: text)
                 .previewLayout(.sizeThatFits)
-                .environmentObject(status)
+                .environmentObject(store)
         }
     }
 

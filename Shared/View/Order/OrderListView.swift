@@ -2,7 +2,7 @@ import SwiftUI
 import Request
 
 struct OrderListView: View {
-    @EnvironmentObject var status: OrderStatus
+    @EnvironmentObject var status: Store
  
     @Environment(\.layoutDirection) var layout
     

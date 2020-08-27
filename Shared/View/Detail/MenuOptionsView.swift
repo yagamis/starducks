@@ -10,7 +10,7 @@ struct MenuOptionsView: View {
     
     @State var loading = false
     
-    @EnvironmentObject var status : OrderStatus
+    @EnvironmentObject var store : Store
     
     var body: some View {
         
@@ -113,8 +113,8 @@ struct MenuOptionsView: View {
 
                 withAnimation {
                     loading = false
-                    status.currentOrder = newOrder
-                    status.action = .add //订单增加的全局通知
+                    store.currentOrder = newOrder
+                    store.action = .add //订单增加的全局通知
                     showDetail.toggle()
                 }
                 

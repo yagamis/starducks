@@ -14,32 +14,32 @@ struct Order: Codable, Identifiable {
     var payvender = ""
 }
 
-class OrderStatus: ObservableObject {
+class Store: ObservableObject {
     enum Action: String {
         case start, add, delete, hudEnd, pay
     }
 
     @Published var action = Action.start
-    @Published var unpayOrders: [Order] = []
+    @Published var unpaidOrders: [Order] = []
     @Published var currentOrder: Order?
     @Published var collapse = false
     @Published var showPay = false
 
-    @Namespace var namespace1
-
-    func getUnpayOrders() {
+    func getUnpaidOrders() {
         AnyRequest<[Order]> {
             Url(Network.findOrders)
             Query([
                 "_sort"  : "created_at:DESC",
-                "status" : "0", //unpay filter
+                "status" : "0", //unpaid filter
             ])
         }
         .onObject({ (orders) in
             DispatchQueue.main.async {
-                self.unpayOrders = orders
+                self.unpaidOrders = orders
             }
         })
         .call()
     }
+    
+    
 }

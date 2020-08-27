@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct starducksApp: App {
 
-    @StateObject var userStatus = OrderStatus()
+    @StateObject var store = Store()
     
     var body: some Scene {
         WindowGroup {
-            HomeView().environmentObject(userStatus)
+            HomeView().environmentObject(store)
 
         }
     }

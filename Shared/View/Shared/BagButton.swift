@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BagButton: View {
-    @EnvironmentObject var status : OrderStatus
+    @EnvironmentObject var store : Store
     
     var body: some View {
         
@@ -14,22 +14,22 @@ struct BagButton: View {
                         .stroke(lineWidth: 3)
                 )
             
-            if status.unpayOrders.count > 0 {//数字角标
+            if store.unpaidOrders.count > 0 {//数字角标
                 ZStack {
                     Circle()
                         .frame(width: 25, height: 25)
-                    Text(status.unpayOrders.count < 100 ? "\(status.unpayOrders.count)" : "99+")
+                    Text(store.unpaidOrders.count < 100 ? "\(store.unpaidOrders.count)" : "99+")
                         .foregroundColor(Color(.systemBackground))
                 }.offset(x: -8, y: 8)
             }
         }
         //hub结束并不获取新订单
-        .onReceive(status.$action, perform: { act in
-            print(act)
-            if act != .hudEnd {
-                status.getUnpayOrders()
+        .onReceive(store.$action) {
+            print($0)
+            if $0 != .hudEnd {
+                store.getUnpaidOrders()
             }
-        })
+        }
     }
 }
 
@@ -39,11 +39,11 @@ struct ShoppingBagView_Previews: PreviewProvider {
         Group {
             BagButton()
                 .previewLayout(.sizeThatFits)
-                .environmentObject(OrderStatus())
+                .environmentObject(Store())
             BagButton()
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-                .environmentObject(OrderStatus())
+                .environmentObject(Store())
         }
     }
 }

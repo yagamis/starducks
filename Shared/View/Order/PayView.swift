@@ -5,7 +5,7 @@ struct PayView: View {
     @State var paySelection : Int
     
     @State private var loading = false
-    @EnvironmentObject var status : OrderStatus
+    @EnvironmentObject var store : Store
     @Binding var showPay : Bool
     @State var successPay = false
     
@@ -27,11 +27,10 @@ struct PayView: View {
             .padding(.top)
             .padding(.trailing)
             
-            
             // title and price
             VStack(alignment: .center) {
-                MenuTitle(name: status.currentOrder!.menu_name)
-                PriceLabel(price: status.currentOrder!.price)
+                MenuTitle(name: store.currentOrder!.menu_name)
+                PriceLabel(price: store.currentOrder!.price)
             }
             .padding()
             
@@ -43,24 +42,19 @@ struct PayView: View {
                 PayChoiceView(selection: $paySelection)
             }.padding()
             
-            
             if loading {
                 LoadingView()
             }
-            
 
             if !successPay {
                 Button(action: {
-                    updateOrder(id: status.currentOrder!.id)
+                    updateOrder(id: store.currentOrder!.id)
                 }, label: {
                     PayButton()
                 }).padding()
             } else {
                PaidSuccessView()
             }
-            
-            
-            
         }
         .background(Blur(style: .systemChromeMaterial))
         .cornerRadius(30)
@@ -70,7 +64,7 @@ struct PayView: View {
     func updateOrder(id: Int)  {
         loading = true
         
-        var newOrder = status.currentOrder!
+        var newOrder = store.currentOrder!
         newOrder.status = 1
         newOrder.payvender = paySelection.description
         
@@ -86,10 +80,10 @@ struct PayView: View {
                 successPay.toggle()
             }
             
-            //等成功支付的2.2秒动画完毕后再更新状态
+            //等成功支付的2.5秒动画完毕后再更新状态
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                status.action = .pay //订单支付的全局通知
-                status.collapse = false //关闭侧边栏
+                store.action = .pay //订单支付的全局通知
+                store.collapse = false //关闭侧边栏
                 showPay.toggle()
             }
         }
@@ -109,15 +103,15 @@ struct PayView_Previews: PreviewProvider {
         
         @State var sel1 : Int
         @State var showPay = false
-        @StateObject var status : OrderStatus = {
-            let _status1 = OrderStatus()
-            _status1.currentOrder = ordersData[2]
-            return _status1
+        @StateObject var store : Store = {
+            let _store = Store()
+            _store.currentOrder = ordersData[2]
+            return _store
         }()
         
         var body: some View {
             PayView(paySelection: sel1, showPay: $showPay)
-                .environmentObject(status)
+                .environmentObject(store)
         }
     }
     
@@ -125,7 +119,6 @@ struct PayView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             testView1(sel1: 1)
-                
                 .preferredColorScheme(.dark)
                 .environment(\.locale, .init(identifier:"zh_cn"))
             testView1(sel1: 0)

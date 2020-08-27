@@ -4,7 +4,7 @@ import SDWebImageSwiftUI
 struct DetailView: View {
     let menu : DrinkMenu
     @State var showMore = false
-    @EnvironmentObject var status: OrderStatus
+    
     @Binding var showDetail : Bool
     
     var body: some View {
