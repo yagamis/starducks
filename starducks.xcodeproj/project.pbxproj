@@ -95,6 +95,19 @@
 		04FF688324CE325B00102470 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF688124CE325B00102470 /* Network.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		04286CBA24F7F806004660B6 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		040FDA1324EB19D0003055F3 /* testGeometryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testGeometryView.swift; sourceTree = "<group>"; };
 		04135F2A24C1A60B00B3580C /* starducksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = starducksApp.swift; sourceTree = "<group>"; };
@@ -382,6 +395,7 @@
 				04135F2D24C1A60C00B3580C /* Sources */,
 				04135F2E24C1A60C00B3580C /* Frameworks */,
 				04135F2F24C1A60C00B3580C /* Resources */,
+				04286CBA24F7F806004660B6 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
@@ -711,6 +725,7 @@
 		04135F4624C1A60C00B3580C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -732,6 +747,7 @@
 		04135F4724C1A60C00B3580C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
