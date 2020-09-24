@@ -47,35 +47,21 @@ struct PayChoiceView: View {
                 .stroke(lineWidth: 1)
                 .foregroundColor(Color(.separator))
         )
-        
-        
-        
+
     }
 }
 
 
 struct PayChoiceView_Previews: PreviewProvider {
-    
-    struct testView1: View {
-        @State var selection :Int
-        var body: some View {
-            VStack {
-                PayChoiceView(selection: $selection)
-                Text(selection.description)
-            }
-        }
-    }
-    
+
     static var previews: some View {
         Group {
-            testView1(selection: 0)
+            PayChoiceView(selection: .constant(0))
                 .preferredColorScheme(.dark)
-                .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"zh"))
-            testView1(selection: 2)
-                .previewLayout(.sizeThatFits)
+            PayChoiceView(selection: .constant(1))
                 .environment(\.locale, .init(identifier:"en"))
 
-        }
+        }.previewLayout(.sizeThatFits)
     }
 }

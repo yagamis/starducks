@@ -17,7 +17,8 @@ struct PaidSuccessView: View {
     
     var body: some View {
         ZStack {
-            Circle()
+            let extractedExpr = Circle()
+            extractedExpr
                 .trim(from: 1/20, to: 1)
                 .stroke(Color.blue, lineWidth: 4)
                 .frame(width: 50,height:50)
@@ -26,7 +27,7 @@ struct PaidSuccessView: View {
                 .onAppear {
                     rotateBlueCircle.toggle()
             }
-            Circle()
+            extractedExpr
                 .frame(width: 54,height:54)
                 .foregroundColor(.green)
                 .scaleEffect(scaleUpGreenCircle ? 1 : 0)

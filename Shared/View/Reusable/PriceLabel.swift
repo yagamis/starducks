@@ -19,7 +19,8 @@ struct PriceLabel: View {
                 Text(" " + String(format: "%.2f", price)).fontWeight(.semibold)
             }.font(.system(size: 32))
             .foregroundColor(Color("subText"))
-        }.environment(\.layoutDirection, .leftToRight)
+        }
+//        .environment(\.layoutDirection, .leftToRight)
     }
 }
 
@@ -31,7 +32,8 @@ struct PriceView_Previews: PreviewProvider {
                 .environment(\.locale, .init(identifier:"zh_cn"))
             PriceLabel(price: drinksData[0].menus[0].price)
                 .previewLayout(.sizeThatFits)
-                .environment(\.locale, .init(identifier:"zh_tw"))
+                .environment(\.locale, .init(identifier:"ar-sa"))
+                .environment(\.layoutDirection, .rightToLeft)
             PriceLabel(price: drinksData[0].menus[0].price)
                 .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"ko_kr"))

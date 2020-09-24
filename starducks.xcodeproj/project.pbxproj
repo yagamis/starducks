@@ -264,7 +264,7 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		042A494124D9088E00E7BB44 /* Shared */ = {
+		042A494124D9088E00E7BB44 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
 				04502AEB24C5B3F200C26CB5 /* BagButton.swift */,
@@ -273,7 +273,7 @@
 				045E7FF124EDBB62007D93D9 /* LoadingView.swift */,
 				0421B1CE24CA2CD90057B8DA /* PriceLabel.swift */,
 			);
-			path = Shared;
+			path = Reusable;
 			sourceTree = "<group>";
 		};
 		042A494224D908EA00E7BB44 /* Order */ = {
@@ -352,7 +352,7 @@
 				042A494224D908EA00E7BB44 /* Order */,
 				042A494024D907EA00E7BB44 /* Home */,
 				042A493F24D907C700E7BB44 /* Detail */,
-				042A494124D9088E00E7BB44 /* Shared */,
+				042A494124D9088E00E7BB44 /* Reusable */,
 			);
 			path = View;
 			sourceTree = "<group>";
