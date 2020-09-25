@@ -20,7 +20,7 @@ struct PriceLabel: View {
             }.font(.system(size: 32))
             .foregroundColor(Color("subText"))
         }
-//        .environment(\.layoutDirection, .leftToRight)
+        .environment(\.layoutDirection, .leftToRight)
     }
 }
 

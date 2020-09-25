@@ -321,6 +321,7 @@
 				0484E70924DF35B800CAAE03 /* BottomSheetView.swift */,
 				0421655824C75907006BCBDF /* DatePickerTest.swift */,
 				0484E70C24DF369C00CAAE03 /* test666.swift */,
+				040FDA1324EB19D0003055F3 /* testGeometryView.swift */,
 				0421655B24C769FE006BCBDF /* test111.swift */,
 				04A80FE724CAEBFA000A93AB /* MaskTest.swift */,
 				0421655E24C76F3A006BCBDF /* transitionExtension.swift */,
@@ -362,7 +363,6 @@
 			children = (
 				04135F2B24C1A60B00B3580C /* HomeView.swift */,
 				0421655524C70DC1006BCBDF /* DetailView.swift */,
-				040FDA1324EB19D0003055F3 /* testGeometryView.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";

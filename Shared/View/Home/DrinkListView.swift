@@ -34,36 +34,15 @@ struct DrinkListView: View {
 }
 
 struct DrinkListView_Previews: PreviewProvider {
-    
-    //对于有绑定的View，创建一个容器，包含一个实例提供给预览
-    struct testView1: View {
-        @State var selection :Int
-        
-        var body: some View {
-            VStack {
-                DrinkListView(drinks: drinksData, selection: $selection)
-                Text(selection.description).font(.largeTitle)
-            }
-        }
-     }
 
     static var previews: some View {
         Group {
-            testView1(selection: 0)
+            DrinkListView(drinks: drinksData, selection: .constant(1))
                 .previewLayout(.sizeThatFits)
-                .preferredColorScheme(.dark)
-            testView1(selection: 0)
+            DrinkListView(drinks: drinksData, selection: .constant(2))
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)
                 .environment(\.locale, .init(identifier:"ja"))
-            testView1(selection: 0)
-                .previewLayout(.sizeThatFits)
-                .preferredColorScheme(.dark)
-                .environment(\.locale, .init(identifier:"zh_hant"))
-            testView1(selection: 0)
-                .previewLayout(.sizeThatFits)
-                .preferredColorScheme(.dark)
-                .environment(\.locale, .init(identifier:"zh_hans"))
         }
 
     }
