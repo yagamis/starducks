@@ -58,7 +58,8 @@ struct SizeOptionsView_Previews: PreviewProvider {
                 .environment(\.locale, .init(identifier:"zh"))
             SizeOptionsView(selection: .constant(1))
                 .previewLayout(.sizeThatFits)
-                .environment(\.locale, .init(identifier:"en"))
+                .environment(\.locale, .init(identifier:"ar-sa"))
+                .environment(\.layoutDirection, .rightToLeft)
 
         }
     }
