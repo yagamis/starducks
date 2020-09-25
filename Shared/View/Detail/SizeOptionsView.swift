@@ -48,26 +48,15 @@ struct SizeOptionsView: View {
     }
 }
 
-
-struct CupSizeButton_Previews: PreviewProvider {
-    
-    struct testView1: View {
-        @State var selection :Int
-        var body: some View {
-            VStack {
-                SizeOptionsView(selection: $selection)
-                Text(selection.description)
-            }
-        }
-    }
+struct SizeOptionsView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            testView1(selection: 0)
+            SizeOptionsView(selection: .constant(0))
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"zh"))
-            testView1(selection: 1)
+            SizeOptionsView(selection: .constant(1))
                 .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"en"))
 
