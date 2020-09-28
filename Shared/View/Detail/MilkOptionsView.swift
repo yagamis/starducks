@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct MilkOptionsView: View {
-    @Binding
-    var selection : Int
+    @Binding var selection : Int
     var options : [MilkOption]
 
     var body: some View {
@@ -20,6 +19,7 @@ struct MilkOptionsView: View {
                         .font(.system(size: 20))
 //                        .frame(maxWidth: .infinity)
                         .foregroundColor(Color.accentColor)
+                    Spacer()
                 }
                 .padding()
                 .onTapGesture {
@@ -45,27 +45,12 @@ struct MilkOptionsView: View {
 
 struct MilkOptionView_Previews: PreviewProvider {
     
-    struct testView1: View {
-        @State var selection :Int
-        var body: some View {
-            VStack {
-                MilkOptionsView(selection: $selection, options: drinksData[0].menus[1].milk)
-                Text(selection.description)
-            }
-        }
-    }
-    
     static var previews: some View {
-        Group {
-            testView1(selection: 0)
+
+            MilkOptionsView(selection: .constant(0), options: drinksData[0].menus[1].milk)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
-                .environment(\.locale, .init(identifier:"zh"))
-            testView1(selection: 1)
-                .previewLayout(.sizeThatFits)
-                .environment(\.locale, .init(identifier:"en"))
 
-        }
     }
 }
 

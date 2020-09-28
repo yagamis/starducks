@@ -16,9 +16,7 @@ enum Size: CaseIterable {
 }
 
 struct SizeOptionsView: View {
-    @Binding
-    var selection : Int
-    
+    @Binding var selection : Int
     
     var body: some View {
         HStack(alignment: .bottom) {

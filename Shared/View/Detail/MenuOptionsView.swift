@@ -135,14 +135,10 @@ struct MenuOptionsView: View {
 
 struct BagOptionView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            MenuOptionsView(menu: drinksData[0].menus[1], sizeSelection: 0, milkSelection: 0, showMore: .constant(false), showDetail: .constant(true))
-                .preferredColorScheme(.dark)
-                .environment(\.locale, .init(identifier:"zh_cn"))
-            
-            MenuOptionsView(menu: drinksData[0].menus[0], sizeSelection: 0, milkSelection: 0, showMore: .constant(false), showDetail: .constant(false))
-                .environment(\.locale, .init(identifier:"ja_jp"))
-        }
+        
+        MenuOptionsView(menu: drinksData[0].menus[1], sizeSelection: 0, milkSelection: 0, showMore: .constant(false), showDetail: .constant(true))
+            .environment(\.locale, .init(identifier:"zh_cn"))
+
     }
 }
 
