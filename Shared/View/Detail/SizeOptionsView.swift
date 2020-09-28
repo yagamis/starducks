@@ -47,18 +47,24 @@ struct SizeOptionsView: View {
 }
 
 struct SizeOptionsView_Previews: PreviewProvider {
+    struct testView1: View {
+        @State var selection : Int
+        
+        var body: some View {
+            SizeOptionsView(selection: $selection)
+        }
+    }
     
     static var previews: some View {
         Group {
+            testView1(selection: 2)
             SizeOptionsView(selection: .constant(0))
                 .preferredColorScheme(.dark)
-                .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"zh"))
             SizeOptionsView(selection: .constant(1))
-                .previewLayout(.sizeThatFits)
                 .environment(\.locale, .init(identifier:"ar-sa"))
                 .environment(\.layoutDirection, .rightToLeft)
 
-        }
+        }.previewLayout(.sizeThatFits)
     }
 }
